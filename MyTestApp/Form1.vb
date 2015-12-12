@@ -1,5 +1,5 @@
 ﻿Public Class Form1
     Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
-        MessageBox.Show(Button1.Text)
+        MessageBox.Show(Button1.Name)
     End Sub
 End Class
