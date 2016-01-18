@@ -57,7 +57,8 @@ Namespace My
         <Global.System.Configuration.ApplicationScopedSettingAttribute(),  _
          Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.Configuration.SpecialSettingAttribute(Global.System.Configuration.SpecialSetting.ConnectionString),  _
-         Global.System.Configuration.DefaultSettingValueAttribute("Data Source=KAZUKI-BOARDPC\SQLEXPRESS;Initial Catalog=LibrarySyetem;User ID=sa")>  _
+         Global.System.Configuration.DefaultSettingValueAttribute("Data Source=KAZUKI-BOARDPC\SQLEXPRESS;Initial Catalog=LibrarySyetem;User ID=sa;Pa"& _ 
+            "ssword=sha91ekzP")>  _
         Public ReadOnly Property LibrarySyetemConnectionString() As String
             Get
                 Return CType(Me("LibrarySyetemConnectionString"),String)
