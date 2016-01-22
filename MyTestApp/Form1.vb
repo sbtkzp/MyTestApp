@@ -5,6 +5,10 @@
     Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
 
         MessageBox.Show(Button1.Text)
+
+        ' T1TableAdapter.Update("book7", "setumei7", 2, "book2", "setumei2")
+        ' T1TableAdapter.Update(LibrarySyetemDataSet.t1.Rows.Item(1))
+        ' T1TableAdapter.Insert("book8", "setumei8")
     End Sub
 
     Private Sub Form1_Load(sender As Object, e As EventArgs) Handles MyBase.Load
@@ -15,6 +19,11 @@
 
         'Dim adapter As New LibrarySyetemDataSetTableAdapters.t1TableAdapter
         'adapter.Fill()
+        Me.LibrarySyetemDataSet.t1.IDColumn.AutoIncrementSeed = 3
+        Me.LibrarySyetemDataSet.t1.IDColumn.AutoIncrementStep = 1
+
+        Dim hoge As String = Me.LibrarySyetemDataSet.t1.IDColumn.ToString
+
     End Sub
 
     Private Sub PrefecturesMasBindingNavigatorSaveItem_Click(sender As Object, e As EventArgs)

@@ -75,6 +75,7 @@ Partial Class Form1
         '
         Me.PrefecturesMasComboBox.DataSource = Me.PrefecturesMasBindingSource
         Me.PrefecturesMasComboBox.DisplayMember = "NAME"
+        Me.PrefecturesMasComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.PrefecturesMasComboBox.FormattingEnabled = True
         Me.PrefecturesMasComboBox.Location = New System.Drawing.Point(12, 80)
         Me.PrefecturesMasComboBox.Name = "PrefecturesMasComboBox"

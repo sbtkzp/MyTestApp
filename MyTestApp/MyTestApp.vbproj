@@ -100,6 +100,9 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>LibrarySyetemDataSet.xsd</DependentUpon>
     </Compile>
+    <Compile Include="LibrarySyetemDataSet.vb">
+      <DependentUpon>LibrarySyetemDataSet.xsd</DependentUpon>
+    </Compile>
     <Compile Include="My Project\AssemblyInfo.vb" />
     <Compile Include="My Project\Application.Designer.vb">
       <AutoGen>True</AutoGen>
