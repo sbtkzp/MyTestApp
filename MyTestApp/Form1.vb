@@ -5,7 +5,7 @@
     Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
 
         MessageBox.Show(Button1.Text)
-        Console.Write("Boe-")
+        Console.Write("Boe-" & sender.ToString & e.ToString & ControlChars.CrLf)
 
         ' T1TableAdapter.Update("book7", "setumei7", 2, "book2", "setumei2")
         ' T1TableAdapter.Update(LibrarySyetemDataSet.t1.Rows.Item(1))
@@ -23,6 +23,19 @@
         'Dim adapter As New LibrarySyetemDataSetTableAdapters.t1TableAdapter
         'adapter.Fill()
         Me.LibrarySyetemDataSet.t1.IDColumn.AutoIncrementSeed = T1DataGridView.Rows.Count
+
+        Dim fs As IO.FileStream = IO.File.Open("MyTestApp.exe.config", IO.FileMode.Open)
+        fs.Close()
+
+        Dim document As Xml.XmlDocument = New Xml.XmlDocument
+        document.Load("MyTestApp.exe.config")
+        Dim element As Xml.XmlElement
+        element = document.DocumentElement
+
+        Dim data As Xml.XmlNodeList = element.GetElementsByTagName("add")
+        Dim str As String = data(0).SelectSingleNode("@connectionString").Value
+
+        MessageBox.Show(str)
 
     End Sub
 
