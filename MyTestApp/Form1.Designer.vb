@@ -35,10 +35,24 @@ Partial Class Form1
         Me.DataGridViewTextBoxColumn1 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.DataGridViewTextBoxColumn2 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.DataGridViewTextBoxColumn3 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.TabControl1 = New System.Windows.Forms.TabControl()
+        Me.TabPage1 = New System.Windows.Forms.TabPage()
+        Me.TabPage2 = New System.Windows.Forms.TabPage()
+        Me.Table2BindingSource = New System.Windows.Forms.BindingSource(Me.components)
+        Me.Table2TableAdapter = New MyTestApp.LibrarySyetemDataSetTableAdapters.table2TableAdapter()
+        Me.Table2DataGridView = New System.Windows.Forms.DataGridView()
+        Me.DataGridViewTextBoxColumn4 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.DataGridViewTextBoxColumn5 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.DataGridViewTextBoxColumn6 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         CType(Me.LibrarySyetemDataSet, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.PrefecturesMasBindingSource, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.T1BindingSource, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.T1DataGridView, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.TabControl1.SuspendLayout()
+        Me.TabPage1.SuspendLayout()
+        Me.TabPage2.SuspendLayout()
+        CType(Me.Table2BindingSource, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.Table2DataGridView, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'Button1
@@ -69,6 +83,7 @@ Partial Class Form1
         Me.TableAdapterManager.BackupDataSetBeforeUpdate = False
         Me.TableAdapterManager.PrefecturesMasTableAdapter = Me.PrefecturesMasTableAdapter
         Me.TableAdapterManager.t1TableAdapter = Nothing
+        Me.TableAdapterManager.table2TableAdapter = Nothing
         Me.TableAdapterManager.UpdateOrder = MyTestApp.LibrarySyetemDataSetTableAdapters.TableAdapterManager.UpdateOrderOption.InsertUpdateDelete
         '
         'PrefecturesMasComboBox
@@ -98,10 +113,10 @@ Partial Class Form1
         Me.T1DataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.T1DataGridView.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.DataGridViewTextBoxColumn1, Me.DataGridViewTextBoxColumn2, Me.DataGridViewTextBoxColumn3})
         Me.T1DataGridView.DataSource = Me.T1BindingSource
-        Me.T1DataGridView.Location = New System.Drawing.Point(12, 140)
+        Me.T1DataGridView.Location = New System.Drawing.Point(6, 6)
         Me.T1DataGridView.Name = "T1DataGridView"
         Me.T1DataGridView.RowTemplate.Height = 21
-        Me.T1DataGridView.Size = New System.Drawing.Size(353, 220)
+        Me.T1DataGridView.Size = New System.Drawing.Size(350, 247)
         Me.T1DataGridView.TabIndex = 2
         '
         'DataGridViewTextBoxColumn1
@@ -123,12 +138,85 @@ Partial Class Form1
         Me.DataGridViewTextBoxColumn3.HeaderText = "DESCRIPTION"
         Me.DataGridViewTextBoxColumn3.Name = "DataGridViewTextBoxColumn3"
         '
+        'TabControl1
+        '
+        Me.TabControl1.Controls.Add(Me.TabPage1)
+        Me.TabControl1.Controls.Add(Me.TabPage2)
+        Me.TabControl1.Location = New System.Drawing.Point(12, 106)
+        Me.TabControl1.Name = "TabControl1"
+        Me.TabControl1.SelectedIndex = 0
+        Me.TabControl1.Size = New System.Drawing.Size(370, 285)
+        Me.TabControl1.TabIndex = 3
+        '
+        'TabPage1
+        '
+        Me.TabPage1.Controls.Add(Me.T1DataGridView)
+        Me.TabPage1.Location = New System.Drawing.Point(4, 22)
+        Me.TabPage1.Name = "TabPage1"
+        Me.TabPage1.Padding = New System.Windows.Forms.Padding(3)
+        Me.TabPage1.Size = New System.Drawing.Size(362, 259)
+        Me.TabPage1.TabIndex = 0
+        Me.TabPage1.Text = "t1"
+        Me.TabPage1.UseVisualStyleBackColor = True
+        '
+        'TabPage2
+        '
+        Me.TabPage2.AutoScroll = True
+        Me.TabPage2.Controls.Add(Me.Table2DataGridView)
+        Me.TabPage2.Location = New System.Drawing.Point(4, 22)
+        Me.TabPage2.Name = "TabPage2"
+        Me.TabPage2.Padding = New System.Windows.Forms.Padding(3)
+        Me.TabPage2.Size = New System.Drawing.Size(362, 259)
+        Me.TabPage2.TabIndex = 1
+        Me.TabPage2.Text = "table2"
+        Me.TabPage2.UseVisualStyleBackColor = True
+        '
+        'Table2BindingSource
+        '
+        Me.Table2BindingSource.DataMember = "table2"
+        Me.Table2BindingSource.DataSource = Me.LibrarySyetemDataSet
+        '
+        'Table2TableAdapter
+        '
+        Me.Table2TableAdapter.ClearBeforeFill = True
+        '
+        'Table2DataGridView
+        '
+        Me.Table2DataGridView.AutoGenerateColumns = False
+        Me.Table2DataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
+        Me.Table2DataGridView.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.DataGridViewTextBoxColumn4, Me.DataGridViewTextBoxColumn5, Me.DataGridViewTextBoxColumn6})
+        Me.Table2DataGridView.DataSource = Me.Table2BindingSource
+        Me.Table2DataGridView.Location = New System.Drawing.Point(6, 6)
+        Me.Table2DataGridView.Name = "Table2DataGridView"
+        Me.Table2DataGridView.RowTemplate.Height = 21
+        Me.Table2DataGridView.Size = New System.Drawing.Size(350, 247)
+        Me.Table2DataGridView.TabIndex = 0
+        '
+        'DataGridViewTextBoxColumn4
+        '
+        Me.DataGridViewTextBoxColumn4.DataPropertyName = "ID"
+        Me.DataGridViewTextBoxColumn4.HeaderText = "ID"
+        Me.DataGridViewTextBoxColumn4.Name = "DataGridViewTextBoxColumn4"
+        Me.DataGridViewTextBoxColumn4.ReadOnly = True
+        '
+        'DataGridViewTextBoxColumn5
+        '
+        Me.DataGridViewTextBoxColumn5.DataPropertyName = "NAME"
+        Me.DataGridViewTextBoxColumn5.HeaderText = "NAME"
+        Me.DataGridViewTextBoxColumn5.Name = "DataGridViewTextBoxColumn5"
+        '
+        'DataGridViewTextBoxColumn6
+        '
+        Me.DataGridViewTextBoxColumn6.DataPropertyName = "PAYMENT"
+        Me.DataGridViewTextBoxColumn6.HeaderText = "PAYMENT"
+        Me.DataGridViewTextBoxColumn6.Name = "DataGridViewTextBoxColumn6"
+        '
         'Form1
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 12.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(394, 403)
-        Me.Controls.Add(Me.T1DataGridView)
+        Me.Controls.Add(Me.TabControl1)
         Me.Controls.Add(Me.PrefecturesMasComboBox)
         Me.Controls.Add(Me.Button1)
         Me.Name = "Form1"
@@ -137,6 +225,11 @@ Partial Class Form1
         CType(Me.PrefecturesMasBindingSource, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.T1BindingSource, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.T1DataGridView, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.TabControl1.ResumeLayout(False)
+        Me.TabPage1.ResumeLayout(False)
+        Me.TabPage2.ResumeLayout(False)
+        CType(Me.Table2BindingSource, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.Table2DataGridView, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
 
     End Sub
@@ -153,4 +246,13 @@ Partial Class Form1
     Friend WithEvents DataGridViewTextBoxColumn1 As DataGridViewTextBoxColumn
     Friend WithEvents DataGridViewTextBoxColumn2 As DataGridViewTextBoxColumn
     Friend WithEvents DataGridViewTextBoxColumn3 As DataGridViewTextBoxColumn
+    Friend WithEvents TabControl1 As TabControl
+    Friend WithEvents TabPage1 As TabPage
+    Friend WithEvents TabPage2 As TabPage
+    Friend WithEvents Table2BindingSource As BindingSource
+    Friend WithEvents Table2TableAdapter As LibrarySyetemDataSetTableAdapters.table2TableAdapter
+    Friend WithEvents Table2DataGridView As DataGridView
+    Friend WithEvents DataGridViewTextBoxColumn4 As DataGridViewTextBoxColumn
+    Friend WithEvents DataGridViewTextBoxColumn5 As DataGridViewTextBoxColumn
+    Friend WithEvents DataGridViewTextBoxColumn6 As DataGridViewTextBoxColumn
 End Class
