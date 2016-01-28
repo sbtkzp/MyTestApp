@@ -11,11 +11,17 @@
         ' T1TableAdapter.Update(LibrarySyetemDataSet.t1.Rows.Item(1))
         ' T1TableAdapter.Insert("book8", "setumei8")
         T1TableAdapter.Update(LibrarySyetemDataSet.t1)
+        Dim maxRow As Object = LibrarySyetemDataSet.t1.Compute("MAX(ID)", Nothing)
+        MessageBox.Show("MAX(ID)=" & maxRow)
+
         Table2TableAdapter.Update(LibrarySyetemDataSet.table2)
+        Table3TableAdapter.Update(LibrarySyetemDataSet.table3)
 
     End Sub
 
     Private Sub Form1_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        'TODO: このコード行はデータを 'LibrarySyetemDataSet.table3' テーブルに読み込みます。必要に応じて移動、または削除をしてください。
+        Me.Table3TableAdapter.Fill(Me.LibrarySyetemDataSet.table3)
         'TODO: このコード行はデータを 'LibrarySyetemDataSet.table2' テーブルに読み込みます。必要に応じて移動、または削除をしてください。
         Me.Table2TableAdapter.Fill(Me.LibrarySyetemDataSet.table2)
         'TODO: このコード行はデータを 'LibrarySyetemDataSet.t1' テーブルに読み込みます。必要に応じて移動、または削除をしてください。
@@ -25,8 +31,9 @@
 
         'Dim adapter As New LibrarySyetemDataSetTableAdapters.t1TableAdapter
         'adapter.Fill()
-        Me.LibrarySyetemDataSet.t1.IDColumn.AutoIncrementSeed = T1DataGridView.Rows.Count
+        LibrarySyetemDataSet.t1.IDColumn.AutoIncrementSeed = T1DataGridView.Rows.Count
         LibrarySyetemDataSet.table2.IDColumn.AutoIncrementSeed = Table2DataGridView.Rows.Count
+        LibrarySyetemDataSet.table3.IDColumn.AutoIncrementSeed = Table3DataGridView.Rows.Count
 
         Dim fs As IO.FileStream = IO.File.Open("MyTestApp.exe.config", IO.FileMode.Open)
         fs.Close()

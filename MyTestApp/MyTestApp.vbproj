@@ -137,7 +137,6 @@
     </None>
     <None Include="LibrarySyetemDataSet.xsd">
       <Generator>MSDataSetGenerator</Generator>
-      <LastGenOutput>LibrarySyetemDataSet.Designer.vb</LastGenOutput>
       <SubType>Designer</SubType>
     </None>
     <None Include="LibrarySyetemDataSet.xss">
