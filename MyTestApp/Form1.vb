@@ -13,13 +13,20 @@
         T1TableAdapter.Update(LibrarySyetemDataSet.t1)
         Dim maxRow As Object = LibrarySyetemDataSet.t1.Compute("MAX(ID)", Nothing)
         MessageBox.Show("MAX(ID)=" & maxRow)
+        MessageBox.Show(TableAdapterManager.Connection.ConnectionString)
 
         Table2TableAdapter.Update(LibrarySyetemDataSet.table2)
         Table3TableAdapter.Update(LibrarySyetemDataSet.table3)
 
+        Dim t1row As LibrarySyetemDataSet.t1Row = LibrarySyetemDataSet.t1.NewRow()
+        t1row.NAME = "boeeboee"
+        t1row.DESCRIPTION = "setumeeeeee1"
+        LibrarySyetemDataSet.t1.Rows.Add(t1row)
+        T1TableAdapter.Update(LibrarySyetemDataSet.t1)
     End Sub
 
     Private Sub Form1_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+
         'TODO: このコード行はデータを 'LibrarySyetemDataSet.table3' テーブルに読み込みます。必要に応じて移動、または削除をしてください。
         Me.Table3TableAdapter.Fill(Me.LibrarySyetemDataSet.table3)
         'TODO: このコード行はデータを 'LibrarySyetemDataSet.table2' テーブルに読み込みます。必要に応じて移動、または削除をしてください。

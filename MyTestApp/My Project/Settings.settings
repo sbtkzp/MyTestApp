@@ -5,10 +5,10 @@
     <Setting Name="LibrarySyetemConnectionString" Type="(Connection string)" Scope="Application">
       <DesignTimeValue Profile="(Default)">&lt;?xml version="1.0" encoding="utf-16"?&gt;
 &lt;SerializableConnectionString xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema"&gt;
-  &lt;ConnectionString&gt;Data Source=KAZUKI-BOARDPC\SQLEXPRESS;Initial Catalog=LibrarySyetem;User ID=sa;Password=sha91ekzP&lt;/ConnectionString&gt;
+  &lt;ConnectionString&gt;Data Source=KAZUKI-BOARDPC\SQLEXPRESS;Initial Catalog=LibrarySyetem;User ID=sa;Password=sha91ekzP;Encrypt=False&lt;/ConnectionString&gt;
   &lt;ProviderName&gt;System.Data.SqlClient&lt;/ProviderName&gt;
 &lt;/SerializableConnectionString&gt;</DesignTimeValue>
-      <Value Profile="(Default)">Data Source=KAZUKI-BOARDPC\SQLEXPRESS;Initial Catalog=LibrarySyetem;User ID=sa;Password=sha91ekzP</Value>
+      <Value Profile="(Default)">Data Source=KAZUKI-BOARDPC\SQLEXPRESS;Initial Catalog=LibrarySyetem;User ID=sa;Password=sha91ekzP;Encrypt=False</Value>
     </Setting>
   </Settings>
 </SettingsFile>
