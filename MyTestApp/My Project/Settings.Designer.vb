@@ -65,13 +65,16 @@ Namespace My
             End Get
         End Property
         
-        <Global.System.Configuration.ApplicationScopedSettingAttribute(),  _
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
          Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.Configuration.SpecialSettingAttribute(Global.System.Configuration.SpecialSetting.ConnectionString)>  _
-        Public ReadOnly Property Setting() As String
+         Global.System.Configuration.DefaultSettingValueAttribute("Floor")>  _
+        Public Property RoundRule() As String
             Get
-                Return CType(Me("Setting"),String)
+                Return CType(Me("RoundRule"),String)
             End Get
+            Set
+                Me("RoundRule") = value
+            End Set
         End Property
     End Class
 End Namespace

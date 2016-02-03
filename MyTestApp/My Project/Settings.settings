@@ -10,5 +10,8 @@
 &lt;/SerializableConnectionString&gt;</DesignTimeValue>
       <Value Profile="(Default)">Data Source=KAZUKI-BOARDPC\SQLEXPRESS;Initial Catalog=LibrarySyetem;User ID=sa;Password=sha91ekzP;Encrypt=False</Value>
     </Setting>
+    <Setting Name="RoundRule" Type="System.String" Scope="User">
+      <Value Profile="(Default)">Floor</Value>
+    </Setting>
   </Settings>
 </SettingsFile>

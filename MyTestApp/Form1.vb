@@ -5,7 +5,8 @@
     Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
 
         MessageBox.Show(Button1.Text)
-        Console.Write("Boe-" & sender.ToString & e.ToString & ControlChars.CrLf)
+        Dim calc As Calculater = New Calculater
+        Console.Write(calc.CeiledValue(78456D, 2))
 
         ' T1TableAdapter.Update("book7", "setumei7", 2, "book2", "setumei2")
         ' T1TableAdapter.Update(LibrarySyetemDataSet.t1.Rows.Item(1))
