@@ -67,7 +67,7 @@ Namespace My
         
         <Global.System.Configuration.UserScopedSettingAttribute(),  _
          Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.Configuration.DefaultSettingValueAttribute("Floor")>  _
+         Global.System.Configuration.DefaultSettingValueAttribute("Round")>  _
         Public Property RoundRule() As String
             Get
                 Return CType(Me("RoundRule"),String)

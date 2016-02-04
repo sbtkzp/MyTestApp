@@ -6,7 +6,7 @@
 
         MessageBox.Show(Button1.Text)
         Dim calc As Calculater = New Calculater
-        Console.Write(calc.CeiledValue(78456D, 2))
+        Console.Write(calc.DoRound(78454D, 1))
 
         ' T1TableAdapter.Update("book7", "setumei7", 2, "book2", "setumei2")
         ' T1TableAdapter.Update(LibrarySyetemDataSet.t1.Rows.Item(1))
