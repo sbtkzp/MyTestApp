@@ -33,7 +33,7 @@ Partial Public Class LibrarySyetemDataSet
     
     Private tabletable3 As table3DataTable
     
-    Private relationtable2_table3 As Global.System.Data.DataRelation
+    Private tableTestTable As TestTableDataTable
     
     Private _schemaSerializationMode As Global.System.Data.SchemaSerializationMode = Global.System.Data.SchemaSerializationMode.IncludeSchema
     
@@ -75,6 +75,9 @@ Partial Public Class LibrarySyetemDataSet
             End If
             If (Not (ds.Tables("table3")) Is Nothing) Then
                 MyBase.Tables.Add(New table3DataTable(ds.Tables("table3")))
+            End If
+            If (Not (ds.Tables("TestTable")) Is Nothing) Then
+                MyBase.Tables.Add(New TestTableDataTable(ds.Tables("TestTable")))
             End If
             Me.DataSetName = ds.DataSetName
             Me.Prefix = ds.Prefix
@@ -130,6 +133,16 @@ Partial Public Class LibrarySyetemDataSet
     Public ReadOnly Property table3() As table3DataTable
         Get
             Return Me.tabletable3
+        End Get
+    End Property
+    
+    <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+     Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0"),  _
+     Global.System.ComponentModel.Browsable(false),  _
+     Global.System.ComponentModel.DesignerSerializationVisibility(Global.System.ComponentModel.DesignerSerializationVisibility.Content)>  _
+    Public ReadOnly Property TestTable() As TestTableDataTable
+        Get
+            Return Me.tableTestTable
         End Get
     End Property
     
@@ -212,6 +225,9 @@ Partial Public Class LibrarySyetemDataSet
             If (Not (ds.Tables("table3")) Is Nothing) Then
                 MyBase.Tables.Add(New table3DataTable(ds.Tables("table3")))
             End If
+            If (Not (ds.Tables("TestTable")) Is Nothing) Then
+                MyBase.Tables.Add(New TestTableDataTable(ds.Tables("TestTable")))
+            End If
             Me.DataSetName = ds.DataSetName
             Me.Prefix = ds.Prefix
             Me.Namespace = ds.Namespace
@@ -268,7 +284,12 @@ Partial Public Class LibrarySyetemDataSet
                 Me.tabletable3.InitVars
             End If
         End If
-        Me.relationtable2_table3 = Me.Relations("table2_table3")
+        Me.tableTestTable = CType(MyBase.Tables("TestTable"),TestTableDataTable)
+        If (initTable = true) Then
+            If (Not (Me.tableTestTable) Is Nothing) Then
+                Me.tableTestTable.InitVars
+            End If
+        End If
     End Sub
     
     <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
@@ -287,8 +308,8 @@ Partial Public Class LibrarySyetemDataSet
         MyBase.Tables.Add(Me.tabletable2)
         Me.tabletable3 = New table3DataTable()
         MyBase.Tables.Add(Me.tabletable3)
-        Me.relationtable2_table3 = New Global.System.Data.DataRelation("table2_table3", New Global.System.Data.DataColumn() {Me.tabletable2.IDColumn}, New Global.System.Data.DataColumn() {Me.tabletable3.table2_IDColumn}, false)
-        Me.Relations.Add(Me.relationtable2_table3)
+        Me.tableTestTable = New TestTableDataTable()
+        MyBase.Tables.Add(Me.tableTestTable)
     End Sub
     
     <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
@@ -312,6 +333,12 @@ Partial Public Class LibrarySyetemDataSet
     <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
      Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
     Private Function ShouldSerializetable3() As Boolean
+        Return false
+    End Function
+    
+    <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+     Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+    Private Function ShouldSerializeTestTable() As Boolean
         Return false
     End Function
     
@@ -384,6 +411,9 @@ Partial Public Class LibrarySyetemDataSet
     
     <Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
     Public Delegate Sub table3RowChangeEventHandler(ByVal sender As Object, ByVal e As table3RowChangeEvent)
+    
+    <Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+    Public Delegate Sub TestTableRowChangeEventHandler(ByVal sender As Object, ByVal e As TestTableRowChangeEvent)
     
     '''<summary>
     '''Represents the strongly named DataTable class.
@@ -823,6 +853,7 @@ Partial Public Class LibrarySyetemDataSet
             Me.Constraints.Add(New Global.System.Data.UniqueConstraint("Constraint1", New Global.System.Data.DataColumn() {Me.columnID}, true))
             Me.columnID.AutoIncrement = true
             Me.columnID.AutoIncrementSeed = -1
+            Me.columnID.AutoIncrementStep = -1
             Me.columnID.AllowDBNull = false
             Me.columnID.ReadOnly = true
             Me.columnID.Unique = true
@@ -1116,6 +1147,7 @@ Partial Public Class LibrarySyetemDataSet
             Me.Constraints.Add(New Global.System.Data.UniqueConstraint("Constraint1", New Global.System.Data.DataColumn() {Me.columnID}, true))
             Me.columnID.AutoIncrement = true
             Me.columnID.AutoIncrementSeed = -1
+            Me.columnID.AutoIncrementStep = -1
             Me.columnID.AllowDBNull = false
             Me.columnID.ReadOnly = true
             Me.columnID.Unique = true
@@ -1370,12 +1402,9 @@ Partial Public Class LibrarySyetemDataSet
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
-        Public Overloads Function Addtable3Row(ByVal NAME As String, ByVal parenttable2RowBytable2_table3 As table2Row, ByVal DESCRIPTION As String) As table3Row
+        Public Overloads Function Addtable3Row(ByVal ID As Long, ByVal NAME As String, ByVal table2_ID As Long, ByVal DESCRIPTION As String) As table3Row
             Dim rowtable3Row As table3Row = CType(Me.NewRow,table3Row)
-            Dim columnValuesArray() As Object = New Object() {Nothing, NAME, Nothing, DESCRIPTION}
-            If (Not (parenttable2RowBytable2_table3) Is Nothing) Then
-                columnValuesArray(2) = parenttable2RowBytable2_table3(0)
-            End If
+            Dim columnValuesArray() As Object = New Object() {ID, NAME, table2_ID, DESCRIPTION}
             rowtable3Row.ItemArray = columnValuesArray
             Me.Rows.Add(rowtable3Row)
             Return rowtable3Row
@@ -1422,8 +1451,6 @@ Partial Public Class LibrarySyetemDataSet
             Me.columnDESCRIPTION = New Global.System.Data.DataColumn("DESCRIPTION", GetType(String), Nothing, Global.System.Data.MappingType.Element)
             MyBase.Columns.Add(Me.columnDESCRIPTION)
             Me.Constraints.Add(New Global.System.Data.UniqueConstraint("Constraint1", New Global.System.Data.DataColumn() {Me.columnID}, true))
-            Me.columnID.AutoIncrement = true
-            Me.columnID.AutoIncrementSeed = -1
             Me.columnID.AllowDBNull = false
             Me.columnID.Unique = true
             Me.columnNAME.AllowDBNull = false
@@ -1515,6 +1542,713 @@ Partial Public Class LibrarySyetemDataSet
             Dim attribute2 As Global.System.Xml.Schema.XmlSchemaAttribute = New Global.System.Xml.Schema.XmlSchemaAttribute()
             attribute2.Name = "tableTypeName"
             attribute2.FixedValue = "table3DataTable"
+            type.Attributes.Add(attribute2)
+            type.Particle = sequence
+            Dim dsSchema As Global.System.Xml.Schema.XmlSchema = ds.GetSchemaSerializable
+            If xs.Contains(dsSchema.TargetNamespace) Then
+                Dim s1 As Global.System.IO.MemoryStream = New Global.System.IO.MemoryStream()
+                Dim s2 As Global.System.IO.MemoryStream = New Global.System.IO.MemoryStream()
+                Try 
+                    Dim schema As Global.System.Xml.Schema.XmlSchema = Nothing
+                    dsSchema.Write(s1)
+                    Dim schemas As Global.System.Collections.IEnumerator = xs.Schemas(dsSchema.TargetNamespace).GetEnumerator
+                    Do While schemas.MoveNext
+                        schema = CType(schemas.Current,Global.System.Xml.Schema.XmlSchema)
+                        s2.SetLength(0)
+                        schema.Write(s2)
+                        If (s1.Length = s2.Length) Then
+                            s1.Position = 0
+                            s2.Position = 0
+                            
+                            Do While ((s1.Position <> s1.Length)  _
+                                        AndAlso (s1.ReadByte = s2.ReadByte))
+                                
+                                
+                            Loop
+                            If (s1.Position = s1.Length) Then
+                                Return type
+                            End If
+                        End If
+                        
+                    Loop
+                Finally
+                    If (Not (s1) Is Nothing) Then
+                        s1.Close
+                    End If
+                    If (Not (s2) Is Nothing) Then
+                        s2.Close
+                    End If
+                End Try
+            End If
+            xs.Add(dsSchema)
+            Return type
+        End Function
+    End Class
+    
+    '''<summary>
+    '''Represents the strongly named DataTable class.
+    '''</summary>
+    <Global.System.Serializable(),  _
+     Global.System.Xml.Serialization.XmlSchemaProviderAttribute("GetTypedTableSchema")>  _
+    Partial Public Class TestTableDataTable
+        Inherits Global.System.Data.TypedTableBase(Of TestTableRow)
+        
+        Private columnID As Global.System.Data.DataColumn
+        
+        Private columnC_BIGINT As Global.System.Data.DataColumn
+        
+        Private columnC_BINARY As Global.System.Data.DataColumn
+        
+        Private columnC_FLAG As Global.System.Data.DataColumn
+        
+        Private columnC_CHAR As Global.System.Data.DataColumn
+        
+        Private columnC_DATE As Global.System.Data.DataColumn
+        
+        Private columnC_DATETIME As Global.System.Data.DataColumn
+        
+        Private columnC_DATETIME2 As Global.System.Data.DataColumn
+        
+        Private columnC_DATETIMEOFFSET As Global.System.Data.DataColumn
+        
+        Private columnC_DECIMAL As Global.System.Data.DataColumn
+        
+        Private columnC_FLOAT As Global.System.Data.DataColumn
+        
+        Private columnC_HIERARCHYID As Global.System.Data.DataColumn
+        
+        Private columnC_IMAGE As Global.System.Data.DataColumn
+        
+        Private columnC_INT As Global.System.Data.DataColumn
+        
+        Private columnC_MONEY As Global.System.Data.DataColumn
+        
+        Private columnC_NCHAR As Global.System.Data.DataColumn
+        
+        Private columnC_NTEXT As Global.System.Data.DataColumn
+        
+        Private columnC_NUMERIC As Global.System.Data.DataColumn
+        
+        Private columnC_NVARCHAR As Global.System.Data.DataColumn
+        
+        Private columnC_REAL As Global.System.Data.DataColumn
+        
+        Private columnC_SMALLDATETIME As Global.System.Data.DataColumn
+        
+        Private columnC_SMALLINT As Global.System.Data.DataColumn
+        
+        Private columnC_SMALLMONEY As Global.System.Data.DataColumn
+        
+        Private columnC_SQL_VARIANT As Global.System.Data.DataColumn
+        
+        Private columnC_TEXT As Global.System.Data.DataColumn
+        
+        Private columnC_TIME As Global.System.Data.DataColumn
+        
+        Private columnC_TIMESTAMP As Global.System.Data.DataColumn
+        
+        Private columnC_TINYINT As Global.System.Data.DataColumn
+        
+        Private columnC_UNIQUEIDENTIFIER As Global.System.Data.DataColumn
+        
+        Private columnC_VARBINARY As Global.System.Data.DataColumn
+        
+        Private columnC_VARCHAR As Global.System.Data.DataColumn
+        
+        Private columnC_XML As Global.System.Data.DataColumn
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Sub New()
+            MyBase.New
+            Me.TableName = "TestTable"
+            Me.BeginInit
+            Me.InitClass
+            Me.EndInit
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Friend Sub New(ByVal table As Global.System.Data.DataTable)
+            MyBase.New
+            Me.TableName = table.TableName
+            If (table.CaseSensitive <> table.DataSet.CaseSensitive) Then
+                Me.CaseSensitive = table.CaseSensitive
+            End If
+            If (table.Locale.ToString <> table.DataSet.Locale.ToString) Then
+                Me.Locale = table.Locale
+            End If
+            If (table.Namespace <> table.DataSet.Namespace) Then
+                Me.Namespace = table.Namespace
+            End If
+            Me.Prefix = table.Prefix
+            Me.MinimumCapacity = table.MinimumCapacity
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Protected Sub New(ByVal info As Global.System.Runtime.Serialization.SerializationInfo, ByVal context As Global.System.Runtime.Serialization.StreamingContext)
+            MyBase.New(info, context)
+            Me.InitVars
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public ReadOnly Property IDColumn() As Global.System.Data.DataColumn
+            Get
+                Return Me.columnID
+            End Get
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public ReadOnly Property C_BIGINTColumn() As Global.System.Data.DataColumn
+            Get
+                Return Me.columnC_BIGINT
+            End Get
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public ReadOnly Property C_BINARYColumn() As Global.System.Data.DataColumn
+            Get
+                Return Me.columnC_BINARY
+            End Get
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public ReadOnly Property C_FLAGColumn() As Global.System.Data.DataColumn
+            Get
+                Return Me.columnC_FLAG
+            End Get
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public ReadOnly Property C_CHARColumn() As Global.System.Data.DataColumn
+            Get
+                Return Me.columnC_CHAR
+            End Get
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public ReadOnly Property C_DATEColumn() As Global.System.Data.DataColumn
+            Get
+                Return Me.columnC_DATE
+            End Get
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public ReadOnly Property C_DATETIMEColumn() As Global.System.Data.DataColumn
+            Get
+                Return Me.columnC_DATETIME
+            End Get
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public ReadOnly Property C_DATETIME2Column() As Global.System.Data.DataColumn
+            Get
+                Return Me.columnC_DATETIME2
+            End Get
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public ReadOnly Property C_DATETIMEOFFSETColumn() As Global.System.Data.DataColumn
+            Get
+                Return Me.columnC_DATETIMEOFFSET
+            End Get
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public ReadOnly Property C_DECIMALColumn() As Global.System.Data.DataColumn
+            Get
+                Return Me.columnC_DECIMAL
+            End Get
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public ReadOnly Property C_FLOATColumn() As Global.System.Data.DataColumn
+            Get
+                Return Me.columnC_FLOAT
+            End Get
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public ReadOnly Property C_HIERARCHYIDColumn() As Global.System.Data.DataColumn
+            Get
+                Return Me.columnC_HIERARCHYID
+            End Get
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public ReadOnly Property C_IMAGEColumn() As Global.System.Data.DataColumn
+            Get
+                Return Me.columnC_IMAGE
+            End Get
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public ReadOnly Property C_INTColumn() As Global.System.Data.DataColumn
+            Get
+                Return Me.columnC_INT
+            End Get
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public ReadOnly Property C_MONEYColumn() As Global.System.Data.DataColumn
+            Get
+                Return Me.columnC_MONEY
+            End Get
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public ReadOnly Property C_NCHARColumn() As Global.System.Data.DataColumn
+            Get
+                Return Me.columnC_NCHAR
+            End Get
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public ReadOnly Property C_NTEXTColumn() As Global.System.Data.DataColumn
+            Get
+                Return Me.columnC_NTEXT
+            End Get
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public ReadOnly Property C_NUMERICColumn() As Global.System.Data.DataColumn
+            Get
+                Return Me.columnC_NUMERIC
+            End Get
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public ReadOnly Property C_NVARCHARColumn() As Global.System.Data.DataColumn
+            Get
+                Return Me.columnC_NVARCHAR
+            End Get
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public ReadOnly Property C_REALColumn() As Global.System.Data.DataColumn
+            Get
+                Return Me.columnC_REAL
+            End Get
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public ReadOnly Property C_SMALLDATETIMEColumn() As Global.System.Data.DataColumn
+            Get
+                Return Me.columnC_SMALLDATETIME
+            End Get
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public ReadOnly Property C_SMALLINTColumn() As Global.System.Data.DataColumn
+            Get
+                Return Me.columnC_SMALLINT
+            End Get
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public ReadOnly Property C_SMALLMONEYColumn() As Global.System.Data.DataColumn
+            Get
+                Return Me.columnC_SMALLMONEY
+            End Get
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public ReadOnly Property C_SQL_VARIANTColumn() As Global.System.Data.DataColumn
+            Get
+                Return Me.columnC_SQL_VARIANT
+            End Get
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public ReadOnly Property C_TEXTColumn() As Global.System.Data.DataColumn
+            Get
+                Return Me.columnC_TEXT
+            End Get
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public ReadOnly Property C_TIMEColumn() As Global.System.Data.DataColumn
+            Get
+                Return Me.columnC_TIME
+            End Get
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public ReadOnly Property C_TIMESTAMPColumn() As Global.System.Data.DataColumn
+            Get
+                Return Me.columnC_TIMESTAMP
+            End Get
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public ReadOnly Property C_TINYINTColumn() As Global.System.Data.DataColumn
+            Get
+                Return Me.columnC_TINYINT
+            End Get
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public ReadOnly Property C_UNIQUEIDENTIFIERColumn() As Global.System.Data.DataColumn
+            Get
+                Return Me.columnC_UNIQUEIDENTIFIER
+            End Get
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public ReadOnly Property C_VARBINARYColumn() As Global.System.Data.DataColumn
+            Get
+                Return Me.columnC_VARBINARY
+            End Get
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public ReadOnly Property C_VARCHARColumn() As Global.System.Data.DataColumn
+            Get
+                Return Me.columnC_VARCHAR
+            End Get
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public ReadOnly Property C_XMLColumn() As Global.System.Data.DataColumn
+            Get
+                Return Me.columnC_XML
+            End Get
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0"),  _
+         Global.System.ComponentModel.Browsable(false)>  _
+        Public ReadOnly Property Count() As Integer
+            Get
+                Return Me.Rows.Count
+            End Get
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Default ReadOnly Property Item(ByVal index As Integer) As TestTableRow
+            Get
+                Return CType(Me.Rows(index),TestTableRow)
+            End Get
+        End Property
+        
+        <Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Event TestTableRowChanging As TestTableRowChangeEventHandler
+        
+        <Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Event TestTableRowChanged As TestTableRowChangeEventHandler
+        
+        <Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Event TestTableRowDeleting As TestTableRowChangeEventHandler
+        
+        <Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Event TestTableRowDeleted As TestTableRowChangeEventHandler
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Overloads Sub AddTestTableRow(ByVal row As TestTableRow)
+            Me.Rows.Add(row)
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Overloads Function AddTestTableRow( _
+                    ByVal C_BIGINT As Long,  _
+                    ByVal C_BINARY() As Byte,  _
+                    ByVal C_FLAG As Boolean,  _
+                    ByVal C_CHAR As String,  _
+                    ByVal C_DATE As Date,  _
+                    ByVal C_DATETIME As Date,  _
+                    ByVal C_DATETIME2 As Date,  _
+                    ByVal C_DATETIMEOFFSET As System.DateTimeOffset,  _
+                    ByVal C_DECIMAL As Decimal,  _
+                    ByVal C_FLOAT As Double,  _
+                    ByVal C_HIERARCHYID As String,  _
+                    ByVal C_IMAGE() As Byte,  _
+                    ByVal C_INT As Integer,  _
+                    ByVal C_MONEY As Decimal,  _
+                    ByVal C_NCHAR As String,  _
+                    ByVal C_NTEXT As String,  _
+                    ByVal C_NUMERIC As Decimal,  _
+                    ByVal C_NVARCHAR As String,  _
+                    ByVal C_REAL As Single,  _
+                    ByVal C_SMALLDATETIME As Date,  _
+                    ByVal C_SMALLINT As Short,  _
+                    ByVal C_SMALLMONEY As Decimal,  _
+                    ByVal C_SQL_VARIANT As Object,  _
+                    ByVal C_TEXT As String,  _
+                    ByVal C_TIME As System.TimeSpan,  _
+                    ByVal C_TIMESTAMP() As Byte,  _
+                    ByVal C_TINYINT As Byte,  _
+                    ByVal C_UNIQUEIDENTIFIER As System.Guid,  _
+                    ByVal C_VARBINARY() As Byte,  _
+                    ByVal C_VARCHAR As String,  _
+                    ByVal C_XML As String) As TestTableRow
+            Dim rowTestTableRow As TestTableRow = CType(Me.NewRow,TestTableRow)
+            Dim columnValuesArray() As Object = New Object() {Nothing, C_BIGINT, C_BINARY, C_FLAG, C_CHAR, C_DATE, C_DATETIME, C_DATETIME2, C_DATETIMEOFFSET, C_DECIMAL, C_FLOAT, C_HIERARCHYID, C_IMAGE, C_INT, C_MONEY, C_NCHAR, C_NTEXT, C_NUMERIC, C_NVARCHAR, C_REAL, C_SMALLDATETIME, C_SMALLINT, C_SMALLMONEY, C_SQL_VARIANT, C_TEXT, C_TIME, C_TIMESTAMP, C_TINYINT, C_UNIQUEIDENTIFIER, C_VARBINARY, C_VARCHAR, C_XML}
+            rowTestTableRow.ItemArray = columnValuesArray
+            Me.Rows.Add(rowTestTableRow)
+            Return rowTestTableRow
+        End Function
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Function FindByID(ByVal ID As Integer) As TestTableRow
+            Return CType(Me.Rows.Find(New Object() {ID}),TestTableRow)
+        End Function
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Overrides Function Clone() As Global.System.Data.DataTable
+            Dim cln As TestTableDataTable = CType(MyBase.Clone,TestTableDataTable)
+            cln.InitVars
+            Return cln
+        End Function
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Protected Overrides Function CreateInstance() As Global.System.Data.DataTable
+            Return New TestTableDataTable()
+        End Function
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Friend Sub InitVars()
+            Me.columnID = MyBase.Columns("ID")
+            Me.columnC_BIGINT = MyBase.Columns("C_BIGINT")
+            Me.columnC_BINARY = MyBase.Columns("C_BINARY")
+            Me.columnC_FLAG = MyBase.Columns("C_FLAG")
+            Me.columnC_CHAR = MyBase.Columns("C_CHAR")
+            Me.columnC_DATE = MyBase.Columns("C_DATE")
+            Me.columnC_DATETIME = MyBase.Columns("C_DATETIME")
+            Me.columnC_DATETIME2 = MyBase.Columns("C_DATETIME2")
+            Me.columnC_DATETIMEOFFSET = MyBase.Columns("C_DATETIMEOFFSET")
+            Me.columnC_DECIMAL = MyBase.Columns("C_DECIMAL")
+            Me.columnC_FLOAT = MyBase.Columns("C_FLOAT")
+            Me.columnC_HIERARCHYID = MyBase.Columns("C_HIERARCHYID")
+            Me.columnC_IMAGE = MyBase.Columns("C_IMAGE")
+            Me.columnC_INT = MyBase.Columns("C_INT")
+            Me.columnC_MONEY = MyBase.Columns("C_MONEY")
+            Me.columnC_NCHAR = MyBase.Columns("C_NCHAR")
+            Me.columnC_NTEXT = MyBase.Columns("C_NTEXT")
+            Me.columnC_NUMERIC = MyBase.Columns("C_NUMERIC")
+            Me.columnC_NVARCHAR = MyBase.Columns("C_NVARCHAR")
+            Me.columnC_REAL = MyBase.Columns("C_REAL")
+            Me.columnC_SMALLDATETIME = MyBase.Columns("C_SMALLDATETIME")
+            Me.columnC_SMALLINT = MyBase.Columns("C_SMALLINT")
+            Me.columnC_SMALLMONEY = MyBase.Columns("C_SMALLMONEY")
+            Me.columnC_SQL_VARIANT = MyBase.Columns("C_SQL_VARIANT")
+            Me.columnC_TEXT = MyBase.Columns("C_TEXT")
+            Me.columnC_TIME = MyBase.Columns("C_TIME")
+            Me.columnC_TIMESTAMP = MyBase.Columns("C_TIMESTAMP")
+            Me.columnC_TINYINT = MyBase.Columns("C_TINYINT")
+            Me.columnC_UNIQUEIDENTIFIER = MyBase.Columns("C_UNIQUEIDENTIFIER")
+            Me.columnC_VARBINARY = MyBase.Columns("C_VARBINARY")
+            Me.columnC_VARCHAR = MyBase.Columns("C_VARCHAR")
+            Me.columnC_XML = MyBase.Columns("C_XML")
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Private Sub InitClass()
+            Me.columnID = New Global.System.Data.DataColumn("ID", GetType(Integer), Nothing, Global.System.Data.MappingType.Element)
+            MyBase.Columns.Add(Me.columnID)
+            Me.columnC_BIGINT = New Global.System.Data.DataColumn("C_BIGINT", GetType(Long), Nothing, Global.System.Data.MappingType.Element)
+            MyBase.Columns.Add(Me.columnC_BIGINT)
+            Me.columnC_BINARY = New Global.System.Data.DataColumn("C_BINARY", GetType(Byte()), Nothing, Global.System.Data.MappingType.Element)
+            MyBase.Columns.Add(Me.columnC_BINARY)
+            Me.columnC_FLAG = New Global.System.Data.DataColumn("C_FLAG", GetType(Boolean), Nothing, Global.System.Data.MappingType.Element)
+            MyBase.Columns.Add(Me.columnC_FLAG)
+            Me.columnC_CHAR = New Global.System.Data.DataColumn("C_CHAR", GetType(String), Nothing, Global.System.Data.MappingType.Element)
+            MyBase.Columns.Add(Me.columnC_CHAR)
+            Me.columnC_DATE = New Global.System.Data.DataColumn("C_DATE", GetType(Date), Nothing, Global.System.Data.MappingType.Element)
+            MyBase.Columns.Add(Me.columnC_DATE)
+            Me.columnC_DATETIME = New Global.System.Data.DataColumn("C_DATETIME", GetType(Date), Nothing, Global.System.Data.MappingType.Element)
+            MyBase.Columns.Add(Me.columnC_DATETIME)
+            Me.columnC_DATETIME2 = New Global.System.Data.DataColumn("C_DATETIME2", GetType(Date), Nothing, Global.System.Data.MappingType.Element)
+            MyBase.Columns.Add(Me.columnC_DATETIME2)
+            Me.columnC_DATETIMEOFFSET = New Global.System.Data.DataColumn("C_DATETIMEOFFSET", GetType(Global.System.DateTimeOffset), Nothing, Global.System.Data.MappingType.Element)
+            MyBase.Columns.Add(Me.columnC_DATETIMEOFFSET)
+            Me.columnC_DECIMAL = New Global.System.Data.DataColumn("C_DECIMAL", GetType(Decimal), Nothing, Global.System.Data.MappingType.Element)
+            MyBase.Columns.Add(Me.columnC_DECIMAL)
+            Me.columnC_FLOAT = New Global.System.Data.DataColumn("C_FLOAT", GetType(Double), Nothing, Global.System.Data.MappingType.Element)
+            MyBase.Columns.Add(Me.columnC_FLOAT)
+            Me.columnC_HIERARCHYID = New Global.System.Data.DataColumn("C_HIERARCHYID", GetType(String), Nothing, Global.System.Data.MappingType.Element)
+            MyBase.Columns.Add(Me.columnC_HIERARCHYID)
+            Me.columnC_IMAGE = New Global.System.Data.DataColumn("C_IMAGE", GetType(Byte()), Nothing, Global.System.Data.MappingType.Element)
+            MyBase.Columns.Add(Me.columnC_IMAGE)
+            Me.columnC_INT = New Global.System.Data.DataColumn("C_INT", GetType(Integer), Nothing, Global.System.Data.MappingType.Element)
+            MyBase.Columns.Add(Me.columnC_INT)
+            Me.columnC_MONEY = New Global.System.Data.DataColumn("C_MONEY", GetType(Decimal), Nothing, Global.System.Data.MappingType.Element)
+            MyBase.Columns.Add(Me.columnC_MONEY)
+            Me.columnC_NCHAR = New Global.System.Data.DataColumn("C_NCHAR", GetType(String), Nothing, Global.System.Data.MappingType.Element)
+            MyBase.Columns.Add(Me.columnC_NCHAR)
+            Me.columnC_NTEXT = New Global.System.Data.DataColumn("C_NTEXT", GetType(String), Nothing, Global.System.Data.MappingType.Element)
+            MyBase.Columns.Add(Me.columnC_NTEXT)
+            Me.columnC_NUMERIC = New Global.System.Data.DataColumn("C_NUMERIC", GetType(Decimal), Nothing, Global.System.Data.MappingType.Element)
+            MyBase.Columns.Add(Me.columnC_NUMERIC)
+            Me.columnC_NVARCHAR = New Global.System.Data.DataColumn("C_NVARCHAR", GetType(String), Nothing, Global.System.Data.MappingType.Element)
+            MyBase.Columns.Add(Me.columnC_NVARCHAR)
+            Me.columnC_REAL = New Global.System.Data.DataColumn("C_REAL", GetType(Single), Nothing, Global.System.Data.MappingType.Element)
+            MyBase.Columns.Add(Me.columnC_REAL)
+            Me.columnC_SMALLDATETIME = New Global.System.Data.DataColumn("C_SMALLDATETIME", GetType(Date), Nothing, Global.System.Data.MappingType.Element)
+            MyBase.Columns.Add(Me.columnC_SMALLDATETIME)
+            Me.columnC_SMALLINT = New Global.System.Data.DataColumn("C_SMALLINT", GetType(Short), Nothing, Global.System.Data.MappingType.Element)
+            MyBase.Columns.Add(Me.columnC_SMALLINT)
+            Me.columnC_SMALLMONEY = New Global.System.Data.DataColumn("C_SMALLMONEY", GetType(Decimal), Nothing, Global.System.Data.MappingType.Element)
+            MyBase.Columns.Add(Me.columnC_SMALLMONEY)
+            Me.columnC_SQL_VARIANT = New Global.System.Data.DataColumn("C_SQL_VARIANT", GetType(Object), Nothing, Global.System.Data.MappingType.Element)
+            MyBase.Columns.Add(Me.columnC_SQL_VARIANT)
+            Me.columnC_TEXT = New Global.System.Data.DataColumn("C_TEXT", GetType(String), Nothing, Global.System.Data.MappingType.Element)
+            MyBase.Columns.Add(Me.columnC_TEXT)
+            Me.columnC_TIME = New Global.System.Data.DataColumn("C_TIME", GetType(Global.System.TimeSpan), Nothing, Global.System.Data.MappingType.Element)
+            MyBase.Columns.Add(Me.columnC_TIME)
+            Me.columnC_TIMESTAMP = New Global.System.Data.DataColumn("C_TIMESTAMP", GetType(Byte()), Nothing, Global.System.Data.MappingType.Element)
+            MyBase.Columns.Add(Me.columnC_TIMESTAMP)
+            Me.columnC_TINYINT = New Global.System.Data.DataColumn("C_TINYINT", GetType(Byte), Nothing, Global.System.Data.MappingType.Element)
+            MyBase.Columns.Add(Me.columnC_TINYINT)
+            Me.columnC_UNIQUEIDENTIFIER = New Global.System.Data.DataColumn("C_UNIQUEIDENTIFIER", GetType(Global.System.Guid), Nothing, Global.System.Data.MappingType.Element)
+            MyBase.Columns.Add(Me.columnC_UNIQUEIDENTIFIER)
+            Me.columnC_VARBINARY = New Global.System.Data.DataColumn("C_VARBINARY", GetType(Byte()), Nothing, Global.System.Data.MappingType.Element)
+            MyBase.Columns.Add(Me.columnC_VARBINARY)
+            Me.columnC_VARCHAR = New Global.System.Data.DataColumn("C_VARCHAR", GetType(String), Nothing, Global.System.Data.MappingType.Element)
+            MyBase.Columns.Add(Me.columnC_VARCHAR)
+            Me.columnC_XML = New Global.System.Data.DataColumn("C_XML", GetType(String), Nothing, Global.System.Data.MappingType.Element)
+            MyBase.Columns.Add(Me.columnC_XML)
+            Me.Constraints.Add(New Global.System.Data.UniqueConstraint("Constraint1", New Global.System.Data.DataColumn() {Me.columnID}, true))
+            Me.columnID.AutoIncrement = true
+            Me.columnID.AutoIncrementSeed = -1
+            Me.columnID.AutoIncrementStep = -1
+            Me.columnID.AllowDBNull = false
+            Me.columnID.ReadOnly = true
+            Me.columnID.Unique = true
+            Me.columnC_CHAR.MaxLength = 15
+            Me.columnC_NCHAR.MaxLength = 10
+            Me.columnC_NTEXT.MaxLength = 1073741823
+            Me.columnC_NVARCHAR.MaxLength = 50
+            Me.columnC_TEXT.MaxLength = 2147483647
+            Me.columnC_TIMESTAMP.ReadOnly = true
+            Me.columnC_VARCHAR.MaxLength = 50
+            Me.columnC_XML.MaxLength = 2147483647
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Function NewTestTableRow() As TestTableRow
+            Return CType(Me.NewRow,TestTableRow)
+        End Function
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Protected Overrides Function NewRowFromBuilder(ByVal builder As Global.System.Data.DataRowBuilder) As Global.System.Data.DataRow
+            Return New TestTableRow(builder)
+        End Function
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Protected Overrides Function GetRowType() As Global.System.Type
+            Return GetType(TestTableRow)
+        End Function
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Protected Overrides Sub OnRowChanged(ByVal e As Global.System.Data.DataRowChangeEventArgs)
+            MyBase.OnRowChanged(e)
+            If (Not (Me.TestTableRowChangedEvent) Is Nothing) Then
+                RaiseEvent TestTableRowChanged(Me, New TestTableRowChangeEvent(CType(e.Row,TestTableRow), e.Action))
+            End If
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Protected Overrides Sub OnRowChanging(ByVal e As Global.System.Data.DataRowChangeEventArgs)
+            MyBase.OnRowChanging(e)
+            If (Not (Me.TestTableRowChangingEvent) Is Nothing) Then
+                RaiseEvent TestTableRowChanging(Me, New TestTableRowChangeEvent(CType(e.Row,TestTableRow), e.Action))
+            End If
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Protected Overrides Sub OnRowDeleted(ByVal e As Global.System.Data.DataRowChangeEventArgs)
+            MyBase.OnRowDeleted(e)
+            If (Not (Me.TestTableRowDeletedEvent) Is Nothing) Then
+                RaiseEvent TestTableRowDeleted(Me, New TestTableRowChangeEvent(CType(e.Row,TestTableRow), e.Action))
+            End If
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Protected Overrides Sub OnRowDeleting(ByVal e As Global.System.Data.DataRowChangeEventArgs)
+            MyBase.OnRowDeleting(e)
+            If (Not (Me.TestTableRowDeletingEvent) Is Nothing) Then
+                RaiseEvent TestTableRowDeleting(Me, New TestTableRowChangeEvent(CType(e.Row,TestTableRow), e.Action))
+            End If
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Sub RemoveTestTableRow(ByVal row As TestTableRow)
+            Me.Rows.Remove(row)
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Shared Function GetTypedTableSchema(ByVal xs As Global.System.Xml.Schema.XmlSchemaSet) As Global.System.Xml.Schema.XmlSchemaComplexType
+            Dim type As Global.System.Xml.Schema.XmlSchemaComplexType = New Global.System.Xml.Schema.XmlSchemaComplexType()
+            Dim sequence As Global.System.Xml.Schema.XmlSchemaSequence = New Global.System.Xml.Schema.XmlSchemaSequence()
+            Dim ds As LibrarySyetemDataSet = New LibrarySyetemDataSet()
+            Dim any1 As Global.System.Xml.Schema.XmlSchemaAny = New Global.System.Xml.Schema.XmlSchemaAny()
+            any1.Namespace = "http://www.w3.org/2001/XMLSchema"
+            any1.MinOccurs = New Decimal(0)
+            any1.MaxOccurs = Decimal.MaxValue
+            any1.ProcessContents = Global.System.Xml.Schema.XmlSchemaContentProcessing.Lax
+            sequence.Items.Add(any1)
+            Dim any2 As Global.System.Xml.Schema.XmlSchemaAny = New Global.System.Xml.Schema.XmlSchemaAny()
+            any2.Namespace = "urn:schemas-microsoft-com:xml-diffgram-v1"
+            any2.MinOccurs = New Decimal(1)
+            any2.ProcessContents = Global.System.Xml.Schema.XmlSchemaContentProcessing.Lax
+            sequence.Items.Add(any2)
+            Dim attribute1 As Global.System.Xml.Schema.XmlSchemaAttribute = New Global.System.Xml.Schema.XmlSchemaAttribute()
+            attribute1.Name = "namespace"
+            attribute1.FixedValue = ds.Namespace
+            type.Attributes.Add(attribute1)
+            Dim attribute2 As Global.System.Xml.Schema.XmlSchemaAttribute = New Global.System.Xml.Schema.XmlSchemaAttribute()
+            attribute2.Name = "tableTypeName"
+            attribute2.FixedValue = "TestTableDataTable"
             type.Attributes.Add(attribute2)
             type.Particle = sequence
             Dim dsSchema As Global.System.Xml.Schema.XmlSchema = ds.GetSchemaSerializable
@@ -1724,16 +2458,6 @@ Partial Public Class LibrarySyetemDataSet
         Public Sub SetPAYMENTNull()
             Me(Me.tabletable2.PAYMENTColumn) = Global.System.Convert.DBNull
         End Sub
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
-        Public Function Gettable3Rows() As table3Row()
-            If (Me.Table.ChildRelations("table2_table3") Is Nothing) Then
-                Return New table3Row(-1) {}
-            Else
-                Return CType(MyBase.GetChildRows(Me.Table.ChildRelations("table2_table3")),table3Row())
-            End If
-        End Function
     End Class
     
     '''<summary>
@@ -1805,17 +2529,6 @@ Partial Public Class LibrarySyetemDataSet
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
-        Public Property table2Row() As table2Row
-            Get
-                Return CType(Me.GetParentRow(Me.Table.ParentRelations("table2_table3")),table2Row)
-            End Get
-            Set
-                Me.SetParentRow(value, Me.Table.ParentRelations("table2_table3"))
-            End Set
-        End Property
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
         Public Function Istable2_IDNull() As Boolean
             Return Me.IsNull(Me.tabletable3.table2_IDColumn)
         End Function
@@ -1836,6 +2549,870 @@ Partial Public Class LibrarySyetemDataSet
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
         Public Sub SetDESCRIPTIONNull()
             Me(Me.tabletable3.DESCRIPTIONColumn) = Global.System.Convert.DBNull
+        End Sub
+    End Class
+    
+    '''<summary>
+    '''Represents strongly named DataRow class.
+    '''</summary>
+    Partial Public Class TestTableRow
+        Inherits Global.System.Data.DataRow
+        
+        Private tableTestTable As TestTableDataTable
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Friend Sub New(ByVal rb As Global.System.Data.DataRowBuilder)
+            MyBase.New(rb)
+            Me.tableTestTable = CType(Me.Table,TestTableDataTable)
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Property ID() As Integer
+            Get
+                Return CType(Me(Me.tableTestTable.IDColumn),Integer)
+            End Get
+            Set
+                Me(Me.tableTestTable.IDColumn) = value
+            End Set
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Property C_BIGINT() As Long
+            Get
+                Try 
+                    Return CType(Me(Me.tableTestTable.C_BIGINTColumn),Long)
+                Catch e As Global.System.InvalidCastException
+                    Throw New Global.System.Data.StrongTypingException("テーブル 'TestTable' にある列 'C_BIGINT' の値は DBNull です。", e)
+                End Try
+            End Get
+            Set
+                Me(Me.tableTestTable.C_BIGINTColumn) = value
+            End Set
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Property C_BINARY() As Byte()
+            Get
+                Try 
+                    Return CType(Me(Me.tableTestTable.C_BINARYColumn),Byte())
+                Catch e As Global.System.InvalidCastException
+                    Throw New Global.System.Data.StrongTypingException("テーブル 'TestTable' にある列 'C_BINARY' の値は DBNull です。", e)
+                End Try
+            End Get
+            Set
+                Me(Me.tableTestTable.C_BINARYColumn) = value
+            End Set
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Property C_FLAG() As Boolean
+            Get
+                Try 
+                    Return CType(Me(Me.tableTestTable.C_FLAGColumn),Boolean)
+                Catch e As Global.System.InvalidCastException
+                    Throw New Global.System.Data.StrongTypingException("テーブル 'TestTable' にある列 'C_FLAG' の値は DBNull です。", e)
+                End Try
+            End Get
+            Set
+                Me(Me.tableTestTable.C_FLAGColumn) = value
+            End Set
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Property C_CHAR() As String
+            Get
+                Try 
+                    Return CType(Me(Me.tableTestTable.C_CHARColumn),String)
+                Catch e As Global.System.InvalidCastException
+                    Throw New Global.System.Data.StrongTypingException("テーブル 'TestTable' にある列 'C_CHAR' の値は DBNull です。", e)
+                End Try
+            End Get
+            Set
+                Me(Me.tableTestTable.C_CHARColumn) = value
+            End Set
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Property C_DATE() As Date
+            Get
+                Try 
+                    Return CType(Me(Me.tableTestTable.C_DATEColumn),Date)
+                Catch e As Global.System.InvalidCastException
+                    Throw New Global.System.Data.StrongTypingException("テーブル 'TestTable' にある列 'C_DATE' の値は DBNull です。", e)
+                End Try
+            End Get
+            Set
+                Me(Me.tableTestTable.C_DATEColumn) = value
+            End Set
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Property C_DATETIME() As Date
+            Get
+                Try 
+                    Return CType(Me(Me.tableTestTable.C_DATETIMEColumn),Date)
+                Catch e As Global.System.InvalidCastException
+                    Throw New Global.System.Data.StrongTypingException("テーブル 'TestTable' にある列 'C_DATETIME' の値は DBNull です。", e)
+                End Try
+            End Get
+            Set
+                Me(Me.tableTestTable.C_DATETIMEColumn) = value
+            End Set
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Property C_DATETIME2() As Date
+            Get
+                Try 
+                    Return CType(Me(Me.tableTestTable.C_DATETIME2Column),Date)
+                Catch e As Global.System.InvalidCastException
+                    Throw New Global.System.Data.StrongTypingException("テーブル 'TestTable' にある列 'C_DATETIME2' の値は DBNull です。", e)
+                End Try
+            End Get
+            Set
+                Me(Me.tableTestTable.C_DATETIME2Column) = value
+            End Set
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Property C_DATETIMEOFFSET() As System.DateTimeOffset
+            Get
+                Try 
+                    Return CType(Me(Me.tableTestTable.C_DATETIMEOFFSETColumn),Global.System.DateTimeOffset)
+                Catch e As Global.System.InvalidCastException
+                    Throw New Global.System.Data.StrongTypingException("テーブル 'TestTable' にある列 'C_DATETIMEOFFSET' の値は DBNull です。", e)
+                End Try
+            End Get
+            Set
+                Me(Me.tableTestTable.C_DATETIMEOFFSETColumn) = value
+            End Set
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Property C_DECIMAL() As Decimal
+            Get
+                Try 
+                    Return CType(Me(Me.tableTestTable.C_DECIMALColumn),Decimal)
+                Catch e As Global.System.InvalidCastException
+                    Throw New Global.System.Data.StrongTypingException("テーブル 'TestTable' にある列 'C_DECIMAL' の値は DBNull です。", e)
+                End Try
+            End Get
+            Set
+                Me(Me.tableTestTable.C_DECIMALColumn) = value
+            End Set
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Property C_FLOAT() As Double
+            Get
+                Try 
+                    Return CType(Me(Me.tableTestTable.C_FLOATColumn),Double)
+                Catch e As Global.System.InvalidCastException
+                    Throw New Global.System.Data.StrongTypingException("テーブル 'TestTable' にある列 'C_FLOAT' の値は DBNull です。", e)
+                End Try
+            End Get
+            Set
+                Me(Me.tableTestTable.C_FLOATColumn) = value
+            End Set
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Property C_HIERARCHYID() As String
+            Get
+                Try 
+                    Return CType(Me(Me.tableTestTable.C_HIERARCHYIDColumn),String)
+                Catch e As Global.System.InvalidCastException
+                    Throw New Global.System.Data.StrongTypingException("テーブル 'TestTable' にある列 'C_HIERARCHYID' の値は DBNull です。", e)
+                End Try
+            End Get
+            Set
+                Me(Me.tableTestTable.C_HIERARCHYIDColumn) = value
+            End Set
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Property C_IMAGE() As Byte()
+            Get
+                Try 
+                    Return CType(Me(Me.tableTestTable.C_IMAGEColumn),Byte())
+                Catch e As Global.System.InvalidCastException
+                    Throw New Global.System.Data.StrongTypingException("テーブル 'TestTable' にある列 'C_IMAGE' の値は DBNull です。", e)
+                End Try
+            End Get
+            Set
+                Me(Me.tableTestTable.C_IMAGEColumn) = value
+            End Set
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Property C_INT() As Integer
+            Get
+                Try 
+                    Return CType(Me(Me.tableTestTable.C_INTColumn),Integer)
+                Catch e As Global.System.InvalidCastException
+                    Throw New Global.System.Data.StrongTypingException("テーブル 'TestTable' にある列 'C_INT' の値は DBNull です。", e)
+                End Try
+            End Get
+            Set
+                Me(Me.tableTestTable.C_INTColumn) = value
+            End Set
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Property C_MONEY() As Decimal
+            Get
+                Try 
+                    Return CType(Me(Me.tableTestTable.C_MONEYColumn),Decimal)
+                Catch e As Global.System.InvalidCastException
+                    Throw New Global.System.Data.StrongTypingException("テーブル 'TestTable' にある列 'C_MONEY' の値は DBNull です。", e)
+                End Try
+            End Get
+            Set
+                Me(Me.tableTestTable.C_MONEYColumn) = value
+            End Set
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Property C_NCHAR() As String
+            Get
+                Try 
+                    Return CType(Me(Me.tableTestTable.C_NCHARColumn),String)
+                Catch e As Global.System.InvalidCastException
+                    Throw New Global.System.Data.StrongTypingException("テーブル 'TestTable' にある列 'C_NCHAR' の値は DBNull です。", e)
+                End Try
+            End Get
+            Set
+                Me(Me.tableTestTable.C_NCHARColumn) = value
+            End Set
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Property C_NTEXT() As String
+            Get
+                Try 
+                    Return CType(Me(Me.tableTestTable.C_NTEXTColumn),String)
+                Catch e As Global.System.InvalidCastException
+                    Throw New Global.System.Data.StrongTypingException("テーブル 'TestTable' にある列 'C_NTEXT' の値は DBNull です。", e)
+                End Try
+            End Get
+            Set
+                Me(Me.tableTestTable.C_NTEXTColumn) = value
+            End Set
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Property C_NUMERIC() As Decimal
+            Get
+                Try 
+                    Return CType(Me(Me.tableTestTable.C_NUMERICColumn),Decimal)
+                Catch e As Global.System.InvalidCastException
+                    Throw New Global.System.Data.StrongTypingException("テーブル 'TestTable' にある列 'C_NUMERIC' の値は DBNull です。", e)
+                End Try
+            End Get
+            Set
+                Me(Me.tableTestTable.C_NUMERICColumn) = value
+            End Set
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Property C_NVARCHAR() As String
+            Get
+                Try 
+                    Return CType(Me(Me.tableTestTable.C_NVARCHARColumn),String)
+                Catch e As Global.System.InvalidCastException
+                    Throw New Global.System.Data.StrongTypingException("テーブル 'TestTable' にある列 'C_NVARCHAR' の値は DBNull です。", e)
+                End Try
+            End Get
+            Set
+                Me(Me.tableTestTable.C_NVARCHARColumn) = value
+            End Set
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Property C_REAL() As Single
+            Get
+                Try 
+                    Return CType(Me(Me.tableTestTable.C_REALColumn),Single)
+                Catch e As Global.System.InvalidCastException
+                    Throw New Global.System.Data.StrongTypingException("テーブル 'TestTable' にある列 'C_REAL' の値は DBNull です。", e)
+                End Try
+            End Get
+            Set
+                Me(Me.tableTestTable.C_REALColumn) = value
+            End Set
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Property C_SMALLDATETIME() As Date
+            Get
+                Try 
+                    Return CType(Me(Me.tableTestTable.C_SMALLDATETIMEColumn),Date)
+                Catch e As Global.System.InvalidCastException
+                    Throw New Global.System.Data.StrongTypingException("テーブル 'TestTable' にある列 'C_SMALLDATETIME' の値は DBNull です。", e)
+                End Try
+            End Get
+            Set
+                Me(Me.tableTestTable.C_SMALLDATETIMEColumn) = value
+            End Set
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Property C_SMALLINT() As Short
+            Get
+                Try 
+                    Return CType(Me(Me.tableTestTable.C_SMALLINTColumn),Short)
+                Catch e As Global.System.InvalidCastException
+                    Throw New Global.System.Data.StrongTypingException("テーブル 'TestTable' にある列 'C_SMALLINT' の値は DBNull です。", e)
+                End Try
+            End Get
+            Set
+                Me(Me.tableTestTable.C_SMALLINTColumn) = value
+            End Set
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Property C_SMALLMONEY() As Decimal
+            Get
+                Try 
+                    Return CType(Me(Me.tableTestTable.C_SMALLMONEYColumn),Decimal)
+                Catch e As Global.System.InvalidCastException
+                    Throw New Global.System.Data.StrongTypingException("テーブル 'TestTable' にある列 'C_SMALLMONEY' の値は DBNull です。", e)
+                End Try
+            End Get
+            Set
+                Me(Me.tableTestTable.C_SMALLMONEYColumn) = value
+            End Set
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Property C_SQL_VARIANT() As Object
+            Get
+                Try 
+                    Return CType(Me(Me.tableTestTable.C_SQL_VARIANTColumn),Object)
+                Catch e As Global.System.InvalidCastException
+                    Throw New Global.System.Data.StrongTypingException("テーブル 'TestTable' にある列 'C_SQL_VARIANT' の値は DBNull です。", e)
+                End Try
+            End Get
+            Set
+                Me(Me.tableTestTable.C_SQL_VARIANTColumn) = value
+            End Set
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Property C_TEXT() As String
+            Get
+                Try 
+                    Return CType(Me(Me.tableTestTable.C_TEXTColumn),String)
+                Catch e As Global.System.InvalidCastException
+                    Throw New Global.System.Data.StrongTypingException("テーブル 'TestTable' にある列 'C_TEXT' の値は DBNull です。", e)
+                End Try
+            End Get
+            Set
+                Me(Me.tableTestTable.C_TEXTColumn) = value
+            End Set
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Property C_TIME() As System.TimeSpan
+            Get
+                Try 
+                    Return CType(Me(Me.tableTestTable.C_TIMEColumn),Global.System.TimeSpan)
+                Catch e As Global.System.InvalidCastException
+                    Throw New Global.System.Data.StrongTypingException("テーブル 'TestTable' にある列 'C_TIME' の値は DBNull です。", e)
+                End Try
+            End Get
+            Set
+                Me(Me.tableTestTable.C_TIMEColumn) = value
+            End Set
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Property C_TIMESTAMP() As Byte()
+            Get
+                Try 
+                    Return CType(Me(Me.tableTestTable.C_TIMESTAMPColumn),Byte())
+                Catch e As Global.System.InvalidCastException
+                    Throw New Global.System.Data.StrongTypingException("テーブル 'TestTable' にある列 'C_TIMESTAMP' の値は DBNull です。", e)
+                End Try
+            End Get
+            Set
+                Me(Me.tableTestTable.C_TIMESTAMPColumn) = value
+            End Set
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Property C_TINYINT() As Byte
+            Get
+                Try 
+                    Return CType(Me(Me.tableTestTable.C_TINYINTColumn),Byte)
+                Catch e As Global.System.InvalidCastException
+                    Throw New Global.System.Data.StrongTypingException("テーブル 'TestTable' にある列 'C_TINYINT' の値は DBNull です。", e)
+                End Try
+            End Get
+            Set
+                Me(Me.tableTestTable.C_TINYINTColumn) = value
+            End Set
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Property C_UNIQUEIDENTIFIER() As System.Guid
+            Get
+                Try 
+                    Return CType(Me(Me.tableTestTable.C_UNIQUEIDENTIFIERColumn),Global.System.Guid)
+                Catch e As Global.System.InvalidCastException
+                    Throw New Global.System.Data.StrongTypingException("テーブル 'TestTable' にある列 'C_UNIQUEIDENTIFIER' の値は DBNull です。", e)
+                End Try
+            End Get
+            Set
+                Me(Me.tableTestTable.C_UNIQUEIDENTIFIERColumn) = value
+            End Set
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Property C_VARBINARY() As Byte()
+            Get
+                Try 
+                    Return CType(Me(Me.tableTestTable.C_VARBINARYColumn),Byte())
+                Catch e As Global.System.InvalidCastException
+                    Throw New Global.System.Data.StrongTypingException("テーブル 'TestTable' にある列 'C_VARBINARY' の値は DBNull です。", e)
+                End Try
+            End Get
+            Set
+                Me(Me.tableTestTable.C_VARBINARYColumn) = value
+            End Set
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Property C_VARCHAR() As String
+            Get
+                Try 
+                    Return CType(Me(Me.tableTestTable.C_VARCHARColumn),String)
+                Catch e As Global.System.InvalidCastException
+                    Throw New Global.System.Data.StrongTypingException("テーブル 'TestTable' にある列 'C_VARCHAR' の値は DBNull です。", e)
+                End Try
+            End Get
+            Set
+                Me(Me.tableTestTable.C_VARCHARColumn) = value
+            End Set
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Property C_XML() As String
+            Get
+                Try 
+                    Return CType(Me(Me.tableTestTable.C_XMLColumn),String)
+                Catch e As Global.System.InvalidCastException
+                    Throw New Global.System.Data.StrongTypingException("テーブル 'TestTable' にある列 'C_XML' の値は DBNull です。", e)
+                End Try
+            End Get
+            Set
+                Me(Me.tableTestTable.C_XMLColumn) = value
+            End Set
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Function IsC_BIGINTNull() As Boolean
+            Return Me.IsNull(Me.tableTestTable.C_BIGINTColumn)
+        End Function
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Sub SetC_BIGINTNull()
+            Me(Me.tableTestTable.C_BIGINTColumn) = Global.System.Convert.DBNull
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Function IsC_BINARYNull() As Boolean
+            Return Me.IsNull(Me.tableTestTable.C_BINARYColumn)
+        End Function
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Sub SetC_BINARYNull()
+            Me(Me.tableTestTable.C_BINARYColumn) = Global.System.Convert.DBNull
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Function IsC_FLAGNull() As Boolean
+            Return Me.IsNull(Me.tableTestTable.C_FLAGColumn)
+        End Function
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Sub SetC_FLAGNull()
+            Me(Me.tableTestTable.C_FLAGColumn) = Global.System.Convert.DBNull
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Function IsC_CHARNull() As Boolean
+            Return Me.IsNull(Me.tableTestTable.C_CHARColumn)
+        End Function
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Sub SetC_CHARNull()
+            Me(Me.tableTestTable.C_CHARColumn) = Global.System.Convert.DBNull
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Function IsC_DATENull() As Boolean
+            Return Me.IsNull(Me.tableTestTable.C_DATEColumn)
+        End Function
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Sub SetC_DATENull()
+            Me(Me.tableTestTable.C_DATEColumn) = Global.System.Convert.DBNull
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Function IsC_DATETIMENull() As Boolean
+            Return Me.IsNull(Me.tableTestTable.C_DATETIMEColumn)
+        End Function
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Sub SetC_DATETIMENull()
+            Me(Me.tableTestTable.C_DATETIMEColumn) = Global.System.Convert.DBNull
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Function IsC_DATETIME2Null() As Boolean
+            Return Me.IsNull(Me.tableTestTable.C_DATETIME2Column)
+        End Function
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Sub SetC_DATETIME2Null()
+            Me(Me.tableTestTable.C_DATETIME2Column) = Global.System.Convert.DBNull
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Function IsC_DATETIMEOFFSETNull() As Boolean
+            Return Me.IsNull(Me.tableTestTable.C_DATETIMEOFFSETColumn)
+        End Function
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Sub SetC_DATETIMEOFFSETNull()
+            Me(Me.tableTestTable.C_DATETIMEOFFSETColumn) = Global.System.Convert.DBNull
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Function IsC_DECIMALNull() As Boolean
+            Return Me.IsNull(Me.tableTestTable.C_DECIMALColumn)
+        End Function
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Sub SetC_DECIMALNull()
+            Me(Me.tableTestTable.C_DECIMALColumn) = Global.System.Convert.DBNull
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Function IsC_FLOATNull() As Boolean
+            Return Me.IsNull(Me.tableTestTable.C_FLOATColumn)
+        End Function
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Sub SetC_FLOATNull()
+            Me(Me.tableTestTable.C_FLOATColumn) = Global.System.Convert.DBNull
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Function IsC_HIERARCHYIDNull() As Boolean
+            Return Me.IsNull(Me.tableTestTable.C_HIERARCHYIDColumn)
+        End Function
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Sub SetC_HIERARCHYIDNull()
+            Me(Me.tableTestTable.C_HIERARCHYIDColumn) = Global.System.Convert.DBNull
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Function IsC_IMAGENull() As Boolean
+            Return Me.IsNull(Me.tableTestTable.C_IMAGEColumn)
+        End Function
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Sub SetC_IMAGENull()
+            Me(Me.tableTestTable.C_IMAGEColumn) = Global.System.Convert.DBNull
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Function IsC_INTNull() As Boolean
+            Return Me.IsNull(Me.tableTestTable.C_INTColumn)
+        End Function
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Sub SetC_INTNull()
+            Me(Me.tableTestTable.C_INTColumn) = Global.System.Convert.DBNull
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Function IsC_MONEYNull() As Boolean
+            Return Me.IsNull(Me.tableTestTable.C_MONEYColumn)
+        End Function
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Sub SetC_MONEYNull()
+            Me(Me.tableTestTable.C_MONEYColumn) = Global.System.Convert.DBNull
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Function IsC_NCHARNull() As Boolean
+            Return Me.IsNull(Me.tableTestTable.C_NCHARColumn)
+        End Function
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Sub SetC_NCHARNull()
+            Me(Me.tableTestTable.C_NCHARColumn) = Global.System.Convert.DBNull
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Function IsC_NTEXTNull() As Boolean
+            Return Me.IsNull(Me.tableTestTable.C_NTEXTColumn)
+        End Function
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Sub SetC_NTEXTNull()
+            Me(Me.tableTestTable.C_NTEXTColumn) = Global.System.Convert.DBNull
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Function IsC_NUMERICNull() As Boolean
+            Return Me.IsNull(Me.tableTestTable.C_NUMERICColumn)
+        End Function
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Sub SetC_NUMERICNull()
+            Me(Me.tableTestTable.C_NUMERICColumn) = Global.System.Convert.DBNull
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Function IsC_NVARCHARNull() As Boolean
+            Return Me.IsNull(Me.tableTestTable.C_NVARCHARColumn)
+        End Function
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Sub SetC_NVARCHARNull()
+            Me(Me.tableTestTable.C_NVARCHARColumn) = Global.System.Convert.DBNull
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Function IsC_REALNull() As Boolean
+            Return Me.IsNull(Me.tableTestTable.C_REALColumn)
+        End Function
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Sub SetC_REALNull()
+            Me(Me.tableTestTable.C_REALColumn) = Global.System.Convert.DBNull
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Function IsC_SMALLDATETIMENull() As Boolean
+            Return Me.IsNull(Me.tableTestTable.C_SMALLDATETIMEColumn)
+        End Function
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Sub SetC_SMALLDATETIMENull()
+            Me(Me.tableTestTable.C_SMALLDATETIMEColumn) = Global.System.Convert.DBNull
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Function IsC_SMALLINTNull() As Boolean
+            Return Me.IsNull(Me.tableTestTable.C_SMALLINTColumn)
+        End Function
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Sub SetC_SMALLINTNull()
+            Me(Me.tableTestTable.C_SMALLINTColumn) = Global.System.Convert.DBNull
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Function IsC_SMALLMONEYNull() As Boolean
+            Return Me.IsNull(Me.tableTestTable.C_SMALLMONEYColumn)
+        End Function
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Sub SetC_SMALLMONEYNull()
+            Me(Me.tableTestTable.C_SMALLMONEYColumn) = Global.System.Convert.DBNull
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Function IsC_SQL_VARIANTNull() As Boolean
+            Return Me.IsNull(Me.tableTestTable.C_SQL_VARIANTColumn)
+        End Function
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Sub SetC_SQL_VARIANTNull()
+            Me(Me.tableTestTable.C_SQL_VARIANTColumn) = Global.System.Convert.DBNull
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Function IsC_TEXTNull() As Boolean
+            Return Me.IsNull(Me.tableTestTable.C_TEXTColumn)
+        End Function
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Sub SetC_TEXTNull()
+            Me(Me.tableTestTable.C_TEXTColumn) = Global.System.Convert.DBNull
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Function IsC_TIMENull() As Boolean
+            Return Me.IsNull(Me.tableTestTable.C_TIMEColumn)
+        End Function
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Sub SetC_TIMENull()
+            Me(Me.tableTestTable.C_TIMEColumn) = Global.System.Convert.DBNull
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Function IsC_TIMESTAMPNull() As Boolean
+            Return Me.IsNull(Me.tableTestTable.C_TIMESTAMPColumn)
+        End Function
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Sub SetC_TIMESTAMPNull()
+            Me(Me.tableTestTable.C_TIMESTAMPColumn) = Global.System.Convert.DBNull
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Function IsC_TINYINTNull() As Boolean
+            Return Me.IsNull(Me.tableTestTable.C_TINYINTColumn)
+        End Function
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Sub SetC_TINYINTNull()
+            Me(Me.tableTestTable.C_TINYINTColumn) = Global.System.Convert.DBNull
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Function IsC_UNIQUEIDENTIFIERNull() As Boolean
+            Return Me.IsNull(Me.tableTestTable.C_UNIQUEIDENTIFIERColumn)
+        End Function
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Sub SetC_UNIQUEIDENTIFIERNull()
+            Me(Me.tableTestTable.C_UNIQUEIDENTIFIERColumn) = Global.System.Convert.DBNull
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Function IsC_VARBINARYNull() As Boolean
+            Return Me.IsNull(Me.tableTestTable.C_VARBINARYColumn)
+        End Function
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Sub SetC_VARBINARYNull()
+            Me(Me.tableTestTable.C_VARBINARYColumn) = Global.System.Convert.DBNull
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Function IsC_VARCHARNull() As Boolean
+            Return Me.IsNull(Me.tableTestTable.C_VARCHARColumn)
+        End Function
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Sub SetC_VARCHARNull()
+            Me(Me.tableTestTable.C_VARCHARColumn) = Global.System.Convert.DBNull
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Function IsC_XMLNull() As Boolean
+            Return Me.IsNull(Me.tableTestTable.C_XMLColumn)
+        End Function
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Sub SetC_XMLNull()
+            Me(Me.tableTestTable.C_XMLColumn) = Global.System.Convert.DBNull
         End Sub
     End Class
     
@@ -1969,6 +3546,42 @@ Partial Public Class LibrarySyetemDataSet
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
         Public ReadOnly Property Row() As table3Row
+            Get
+                Return Me.eventRow
+            End Get
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public ReadOnly Property Action() As Global.System.Data.DataRowAction
+            Get
+                Return Me.eventAction
+            End Get
+        End Property
+    End Class
+    
+    '''<summary>
+    '''Row event argument class
+    '''</summary>
+    <Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+    Public Class TestTableRowChangeEvent
+        Inherits Global.System.EventArgs
+        
+        Private eventRow As TestTableRow
+        
+        Private eventAction As Global.System.Data.DataRowAction
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Sub New(ByVal row As TestTableRow, ByVal action As Global.System.Data.DataRowAction)
+            MyBase.New
+            Me.eventRow = row
+            Me.eventAction = action
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public ReadOnly Property Row() As TestTableRow
             Get
                 Return Me.eventRow
             End Get
@@ -2125,15 +3738,15 @@ Namespace LibrarySyetemDataSetTableAdapters
             Me._adapter.DeleteCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@Original_NAME", Global.System.Data.SqlDbType.NVarChar, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "NAME", Global.System.Data.DataRowVersion.Original, false, Nothing, "", "", ""))
             Me._adapter.InsertCommand = New Global.System.Data.SqlClient.SqlCommand()
             Me._adapter.InsertCommand.Connection = Me.Connection
-            Me._adapter.InsertCommand.CommandText = "INSERT INTO [dbo].[PrefecturesMas] ([NAME]) VALUES (@NAME);"&Global.Microsoft.VisualBasic.ChrW(10)&"SELECT ID, NAME FROM "& _ 
-                "PrefecturesMas WHERE (ID = SCOPE_IDENTITY())"
+            Me._adapter.InsertCommand.CommandText = "INSERT INTO [dbo].[PrefecturesMas] ([NAME]) VALUES (@NAME);"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"SELECT ID, NAME FROM"& _ 
+                " PrefecturesMas WHERE (ID = SCOPE_IDENTITY())"
             Me._adapter.InsertCommand.CommandType = Global.System.Data.CommandType.Text
             Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@NAME", Global.System.Data.SqlDbType.NVarChar, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "NAME", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
             Me._adapter.UpdateCommand = New Global.System.Data.SqlClient.SqlCommand()
             Me._adapter.UpdateCommand.Connection = Me.Connection
             Me._adapter.UpdateCommand.CommandText = "UPDATE [dbo].[PrefecturesMas] SET [NAME] = @NAME WHERE (([ID] = @Original_ID) AND"& _ 
-                " ([NAME] = @Original_NAME));"&Global.Microsoft.VisualBasic.ChrW(10)&"SELECT ID, NAME FROM PrefecturesMas WHERE (ID = @ID"& _ 
-                ")"
+                " ([NAME] = @Original_NAME));"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"SELECT ID, NAME FROM PrefecturesMas WHERE (ID = @I"& _ 
+                "D)"
             Me._adapter.UpdateCommand.CommandType = Global.System.Data.CommandType.Text
             Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@NAME", Global.System.Data.SqlDbType.NVarChar, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "NAME", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
             Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@Original_ID", Global.System.Data.SqlDbType.Int, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "ID", Global.System.Data.DataRowVersion.Original, false, Nothing, "", "", ""))
@@ -2445,17 +4058,17 @@ Namespace LibrarySyetemDataSetTableAdapters
             Me._adapter.DeleteCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@Original_DESCRIPTION", Global.System.Data.SqlDbType.NVarChar, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "DESCRIPTION", Global.System.Data.DataRowVersion.Original, false, Nothing, "", "", ""))
             Me._adapter.InsertCommand = New Global.System.Data.SqlClient.SqlCommand()
             Me._adapter.InsertCommand.Connection = Me.Connection
-            Me._adapter.InsertCommand.CommandText = "INSERT INTO [dbo].[t1] ([NAME], [DESCRIPTION]) VALUES (@NAME, @DESCRIPTION);"&Global.Microsoft.VisualBasic.ChrW(10)&"SELE"& _ 
-                "CT ID, NAME, DESCRIPTION FROM t1 WHERE (ID = SCOPE_IDENTITY())"
+            Me._adapter.InsertCommand.CommandText = "INSERT INTO [dbo].[t1] ([NAME], [DESCRIPTION]) VALUES (@NAME, @DESCRIPTION);"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"SEL"& _ 
+                "ECT ID, NAME, DESCRIPTION FROM t1 WHERE (ID = SCOPE_IDENTITY())"
             Me._adapter.InsertCommand.CommandType = Global.System.Data.CommandType.Text
-            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@NAME", Global.System.Data.SqlDbType.NChar, 10, Global.System.Data.ParameterDirection.Input, 0, 0, "NAME", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
-            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@DESCRIPTION", Global.System.Data.SqlDbType.NVarChar, 50, Global.System.Data.ParameterDirection.Input, 0, 0, "DESCRIPTION", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@NAME", Global.System.Data.SqlDbType.NChar, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "NAME", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@DESCRIPTION", Global.System.Data.SqlDbType.NVarChar, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "DESCRIPTION", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
             Me._adapter.UpdateCommand = New Global.System.Data.SqlClient.SqlCommand()
             Me._adapter.UpdateCommand.Connection = Me.Connection
             Me._adapter.UpdateCommand.CommandText = "UPDATE [dbo].[t1] SET [NAME] = @NAME, [DESCRIPTION] = @DESCRIPTION WHERE (([ID] ="& _ 
                 " @Original_ID) AND ([NAME] = @Original_NAME) AND ((@IsNull_DESCRIPTION = 1 AND ["& _ 
-                "DESCRIPTION] IS NULL) OR ([DESCRIPTION] = @Original_DESCRIPTION)));"&Global.Microsoft.VisualBasic.ChrW(10)&"SELECT ID, N"& _ 
-                "AME, DESCRIPTION FROM t1 WHERE (ID = @ID)"
+                "DESCRIPTION] IS NULL) OR ([DESCRIPTION] = @Original_DESCRIPTION)));"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"SELECT ID, "& _ 
+                "NAME, DESCRIPTION FROM t1 WHERE (ID = @ID)"
             Me._adapter.UpdateCommand.CommandType = Global.System.Data.CommandType.Text
             Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@NAME", Global.System.Data.SqlDbType.NChar, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "NAME", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
             Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@DESCRIPTION", Global.System.Data.SqlDbType.NVarChar, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "DESCRIPTION", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
@@ -3387,6 +5000,832 @@ Namespace LibrarySyetemDataSetTableAdapters
     End Class
     
     '''<summary>
+    '''Represents the connection and commands used to retrieve and save data.
+    '''</summary>
+    <Global.System.ComponentModel.DesignerCategoryAttribute("code"),  _
+     Global.System.ComponentModel.ToolboxItem(true),  _
+     Global.System.ComponentModel.DataObjectAttribute(true),  _
+     Global.System.ComponentModel.DesignerAttribute("Microsoft.VSDesigner.DataSource.Design.TableAdapterDesigner, Microsoft.VSDesigner"& _ 
+        ", Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"),  _
+     Global.System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")>  _
+    Partial Public Class TestTableTableAdapter
+        Inherits Global.System.ComponentModel.Component
+        
+        Private WithEvents _adapter As Global.System.Data.SqlClient.SqlDataAdapter
+        
+        Private _connection As Global.System.Data.SqlClient.SqlConnection
+        
+        Private _transaction As Global.System.Data.SqlClient.SqlTransaction
+        
+        Private _commandCollection() As Global.System.Data.SqlClient.SqlCommand
+        
+        Private _clearBeforeFill As Boolean
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Sub New()
+            MyBase.New
+            Me.ClearBeforeFill = true
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Protected Friend ReadOnly Property Adapter() As Global.System.Data.SqlClient.SqlDataAdapter
+            Get
+                If (Me._adapter Is Nothing) Then
+                    Me.InitAdapter
+                End If
+                Return Me._adapter
+            End Get
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Friend Property Connection() As Global.System.Data.SqlClient.SqlConnection
+            Get
+                If (Me._connection Is Nothing) Then
+                    Me.InitConnection
+                End If
+                Return Me._connection
+            End Get
+            Set
+                Me._connection = value
+                If (Not (Me.Adapter.InsertCommand) Is Nothing) Then
+                    Me.Adapter.InsertCommand.Connection = value
+                End If
+                If (Not (Me.Adapter.DeleteCommand) Is Nothing) Then
+                    Me.Adapter.DeleteCommand.Connection = value
+                End If
+                If (Not (Me.Adapter.UpdateCommand) Is Nothing) Then
+                    Me.Adapter.UpdateCommand.Connection = value
+                End If
+                Dim i As Integer = 0
+                Do While (i < Me.CommandCollection.Length)
+                    If (Not (Me.CommandCollection(i)) Is Nothing) Then
+                        CType(Me.CommandCollection(i),Global.System.Data.SqlClient.SqlCommand).Connection = value
+                    End If
+                    i = (i + 1)
+                Loop
+            End Set
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Friend Property Transaction() As Global.System.Data.SqlClient.SqlTransaction
+            Get
+                Return Me._transaction
+            End Get
+            Set
+                Me._transaction = value
+                Dim i As Integer = 0
+                Do While (i < Me.CommandCollection.Length)
+                    Me.CommandCollection(i).Transaction = Me._transaction
+                    i = (i + 1)
+                Loop
+                If ((Not (Me.Adapter) Is Nothing)  _
+                            AndAlso (Not (Me.Adapter.DeleteCommand) Is Nothing)) Then
+                    Me.Adapter.DeleteCommand.Transaction = Me._transaction
+                End If
+                If ((Not (Me.Adapter) Is Nothing)  _
+                            AndAlso (Not (Me.Adapter.InsertCommand) Is Nothing)) Then
+                    Me.Adapter.InsertCommand.Transaction = Me._transaction
+                End If
+                If ((Not (Me.Adapter) Is Nothing)  _
+                            AndAlso (Not (Me.Adapter.UpdateCommand) Is Nothing)) Then
+                    Me.Adapter.UpdateCommand.Transaction = Me._transaction
+                End If
+            End Set
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Protected ReadOnly Property CommandCollection() As Global.System.Data.SqlClient.SqlCommand()
+            Get
+                If (Me._commandCollection Is Nothing) Then
+                    Me.InitCommandCollection
+                End If
+                Return Me._commandCollection
+            End Get
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Property ClearBeforeFill() As Boolean
+            Get
+                Return Me._clearBeforeFill
+            End Get
+            Set
+                Me._clearBeforeFill = value
+            End Set
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Private Sub InitAdapter()
+            Me._adapter = New Global.System.Data.SqlClient.SqlDataAdapter()
+            Dim tableMapping As Global.System.Data.Common.DataTableMapping = New Global.System.Data.Common.DataTableMapping()
+            tableMapping.SourceTable = "Table"
+            tableMapping.DataSetTable = "TestTable"
+            tableMapping.ColumnMappings.Add("ID", "ID")
+            tableMapping.ColumnMappings.Add("C_BIGINT", "C_BIGINT")
+            tableMapping.ColumnMappings.Add("C_BINARY", "C_BINARY")
+            tableMapping.ColumnMappings.Add("C_FLAG", "C_FLAG")
+            tableMapping.ColumnMappings.Add("C_CHAR", "C_CHAR")
+            tableMapping.ColumnMappings.Add("C_DATE", "C_DATE")
+            tableMapping.ColumnMappings.Add("C_DATETIME", "C_DATETIME")
+            tableMapping.ColumnMappings.Add("C_DATETIME2", "C_DATETIME2")
+            tableMapping.ColumnMappings.Add("C_DATETIMEOFFSET", "C_DATETIMEOFFSET")
+            tableMapping.ColumnMappings.Add("C_DECIMAL", "C_DECIMAL")
+            tableMapping.ColumnMappings.Add("C_FLOAT", "C_FLOAT")
+            tableMapping.ColumnMappings.Add("C_HIERARCHYID", "C_HIERARCHYID")
+            tableMapping.ColumnMappings.Add("C_IMAGE", "C_IMAGE")
+            tableMapping.ColumnMappings.Add("C_INT", "C_INT")
+            tableMapping.ColumnMappings.Add("C_MONEY", "C_MONEY")
+            tableMapping.ColumnMappings.Add("C_NCHAR", "C_NCHAR")
+            tableMapping.ColumnMappings.Add("C_NTEXT", "C_NTEXT")
+            tableMapping.ColumnMappings.Add("C_NUMERIC", "C_NUMERIC")
+            tableMapping.ColumnMappings.Add("C_NVARCHAR", "C_NVARCHAR")
+            tableMapping.ColumnMappings.Add("C_REAL", "C_REAL")
+            tableMapping.ColumnMappings.Add("C_SMALLDATETIME", "C_SMALLDATETIME")
+            tableMapping.ColumnMappings.Add("C_SMALLINT", "C_SMALLINT")
+            tableMapping.ColumnMappings.Add("C_SMALLMONEY", "C_SMALLMONEY")
+            tableMapping.ColumnMappings.Add("C_SQL_VARIANT", "C_SQL_VARIANT")
+            tableMapping.ColumnMappings.Add("C_TEXT", "C_TEXT")
+            tableMapping.ColumnMappings.Add("C_TIME", "C_TIME")
+            tableMapping.ColumnMappings.Add("C_TIMESTAMP", "C_TIMESTAMP")
+            tableMapping.ColumnMappings.Add("C_TINYINT", "C_TINYINT")
+            tableMapping.ColumnMappings.Add("C_UNIQUEIDENTIFIER", "C_UNIQUEIDENTIFIER")
+            tableMapping.ColumnMappings.Add("C_VARBINARY", "C_VARBINARY")
+            tableMapping.ColumnMappings.Add("C_VARCHAR", "C_VARCHAR")
+            tableMapping.ColumnMappings.Add("C_XML", "C_XML")
+            Me._adapter.TableMappings.Add(tableMapping)
+            Me._adapter.DeleteCommand = New Global.System.Data.SqlClient.SqlCommand()
+            Me._adapter.DeleteCommand.Connection = Me.Connection
+            Me._adapter.DeleteCommand.CommandText = "DELETE FROM [dbo].[TestTable] WHERE (([ID] = @Original_ID) AND ((@IsNull_C_TIMEST"& _ 
+                "AMP = 1 AND [C_TIMESTAMP] IS NULL) OR ([C_TIMESTAMP] = @Original_C_TIMESTAMP)))"
+            Me._adapter.DeleteCommand.CommandType = Global.System.Data.CommandType.Text
+            Me._adapter.DeleteCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@Original_ID", Global.System.Data.SqlDbType.Int, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "ID", Global.System.Data.DataRowVersion.Original, false, Nothing, "", "", ""))
+            Me._adapter.DeleteCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@IsNull_C_TIMESTAMP", Global.System.Data.SqlDbType.Int, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "C_TIMESTAMP", Global.System.Data.DataRowVersion.Original, true, Nothing, "", "", ""))
+            Me._adapter.DeleteCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@Original_C_TIMESTAMP", Global.System.Data.SqlDbType.Timestamp, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "C_TIMESTAMP", Global.System.Data.DataRowVersion.Original, false, Nothing, "", "", ""))
+            Me._adapter.InsertCommand = New Global.System.Data.SqlClient.SqlCommand()
+            Me._adapter.InsertCommand.Connection = Me.Connection
+            Me._adapter.InsertCommand.CommandText = "INSERT INTO [dbo].[TestTable] ([C_BIGINT], [C_BINARY], [C_FLAG], [C_CHAR], [C_DAT"& _ 
+                "E], [C_DATETIME], [C_DATETIME2], [C_DATETIMEOFFSET], [C_DECIMAL], [C_FLOAT], [C_"& _ 
+                "HIERARCHYID], [C_IMAGE], [C_INT], [C_MONEY], [C_NCHAR], [C_NTEXT], [C_NUMERIC], "& _ 
+                "[C_NVARCHAR], [C_REAL], [C_SMALLDATETIME], [C_SMALLINT], [C_SMALLMONEY], [C_SQL_"& _ 
+                "VARIANT], [C_TEXT], [C_TIME], [C_TINYINT], [C_UNIQUEIDENTIFIER], [C_VARBINARY], "& _ 
+                "[C_VARCHAR], [C_XML]) VALUES (@C_BIGINT, @C_BINARY, @C_FLAG, @C_CHAR, @C_DATE, @"& _ 
+                "C_DATETIME, @C_DATETIME2, @C_DATETIMEOFFSET, @C_DECIMAL, @C_FLOAT, @C_HIERARCHYI"& _ 
+                "D, @C_IMAGE, @C_INT, @C_MONEY, @C_NCHAR, @C_NTEXT, @C_NUMERIC, @C_NVARCHAR, @C_R"& _ 
+                "EAL, @C_SMALLDATETIME, @C_SMALLINT, @C_SMALLMONEY, @C_SQL_VARIANT, @C_TEXT, @C_T"& _ 
+                "IME, @C_TINYINT, @C_UNIQUEIDENTIFIER, @C_VARBINARY, @C_VARCHAR, @C_XML);"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"SELECT"& _ 
+                " ID, C_BIGINT, C_BINARY, C_FLAG, C_CHAR, C_DATE, C_DATETIME, C_DATETIME2, C_DATE"& _ 
+                "TIMEOFFSET, C_DECIMAL, C_FLOAT, C_HIERARCHYID, C_IMAGE, C_INT, C_MONEY, C_NCHAR,"& _ 
+                " C_NTEXT, C_NUMERIC, C_NVARCHAR, C_REAL, C_SMALLDATETIME, C_SMALLINT, C_SMALLMON"& _ 
+                "EY, C_SQL_VARIANT, C_TEXT, C_TIME, C_TIMESTAMP, C_TINYINT, C_UNIQUEIDENTIFIER, C"& _ 
+                "_VARBINARY, C_VARCHAR, C_XML FROM TestTable WHERE (ID = SCOPE_IDENTITY())"
+            Me._adapter.InsertCommand.CommandType = Global.System.Data.CommandType.Text
+            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@C_BIGINT", Global.System.Data.SqlDbType.BigInt, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "C_BIGINT", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@C_BINARY", Global.System.Data.SqlDbType.Binary, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "C_BINARY", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@C_FLAG", Global.System.Data.SqlDbType.Bit, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "C_FLAG", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@C_CHAR", Global.System.Data.SqlDbType.[Char], 0, Global.System.Data.ParameterDirection.Input, 0, 0, "C_CHAR", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@C_DATE", Global.System.Data.SqlDbType.[Date], 0, Global.System.Data.ParameterDirection.Input, 0, 0, "C_DATE", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@C_DATETIME", Global.System.Data.SqlDbType.DateTime, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "C_DATETIME", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@C_DATETIME2", Global.System.Data.SqlDbType.DateTime2, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "C_DATETIME2", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@C_DATETIMEOFFSET", Global.System.Data.SqlDbType.DateTimeOffset, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "C_DATETIMEOFFSET", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@C_DECIMAL", Global.System.Data.SqlDbType.[Decimal], 0, Global.System.Data.ParameterDirection.Input, 18, 0, "C_DECIMAL", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@C_FLOAT", Global.System.Data.SqlDbType.Float, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "C_FLOAT", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@C_HIERARCHYID", Global.System.Data.SqlDbType.NVarChar, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "C_HIERARCHYID", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@C_IMAGE", Global.System.Data.SqlDbType.Image, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "C_IMAGE", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@C_INT", Global.System.Data.SqlDbType.Int, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "C_INT", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@C_MONEY", Global.System.Data.SqlDbType.Money, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "C_MONEY", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@C_NCHAR", Global.System.Data.SqlDbType.NChar, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "C_NCHAR", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@C_NTEXT", Global.System.Data.SqlDbType.NText, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "C_NTEXT", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@C_NUMERIC", Global.System.Data.SqlDbType.[Decimal], 0, Global.System.Data.ParameterDirection.Input, 18, 0, "C_NUMERIC", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@C_NVARCHAR", Global.System.Data.SqlDbType.NVarChar, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "C_NVARCHAR", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@C_REAL", Global.System.Data.SqlDbType.Real, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "C_REAL", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@C_SMALLDATETIME", Global.System.Data.SqlDbType.SmallDateTime, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "C_SMALLDATETIME", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@C_SMALLINT", Global.System.Data.SqlDbType.SmallInt, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "C_SMALLINT", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@C_SMALLMONEY", Global.System.Data.SqlDbType.SmallMoney, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "C_SMALLMONEY", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@C_SQL_VARIANT", Global.System.Data.SqlDbType.[Variant], 0, Global.System.Data.ParameterDirection.Input, 0, 0, "C_SQL_VARIANT", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@C_TEXT", Global.System.Data.SqlDbType.Text, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "C_TEXT", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@C_TIME", Global.System.Data.SqlDbType.Time, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "C_TIME", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@C_TINYINT", Global.System.Data.SqlDbType.TinyInt, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "C_TINYINT", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@C_UNIQUEIDENTIFIER", Global.System.Data.SqlDbType.UniqueIdentifier, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "C_UNIQUEIDENTIFIER", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@C_VARBINARY", Global.System.Data.SqlDbType.VarBinary, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "C_VARBINARY", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@C_VARCHAR", Global.System.Data.SqlDbType.VarChar, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "C_VARCHAR", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@C_XML", Global.System.Data.SqlDbType.Xml, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "C_XML", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._adapter.UpdateCommand = New Global.System.Data.SqlClient.SqlCommand()
+            Me._adapter.UpdateCommand.Connection = Me.Connection
+            Me._adapter.UpdateCommand.CommandText = "UPDATE [dbo].[TestTable] SET [C_BIGINT] = @C_BIGINT, [C_BINARY] = @C_BINARY, [C_F"& _ 
+                "LAG] = @C_FLAG, [C_CHAR] = @C_CHAR, [C_DATE] = @C_DATE, [C_DATETIME] = @C_DATETI"& _ 
+                "ME, [C_DATETIME2] = @C_DATETIME2, [C_DATETIMEOFFSET] = @C_DATETIMEOFFSET, [C_DEC"& _ 
+                "IMAL] = @C_DECIMAL, [C_FLOAT] = @C_FLOAT, [C_HIERARCHYID] = @C_HIERARCHYID, [C_I"& _ 
+                "MAGE] = @C_IMAGE, [C_INT] = @C_INT, [C_MONEY] = @C_MONEY, [C_NCHAR] = @C_NCHAR, "& _ 
+                "[C_NTEXT] = @C_NTEXT, [C_NUMERIC] = @C_NUMERIC, [C_NVARCHAR] = @C_NVARCHAR, [C_R"& _ 
+                "EAL] = @C_REAL, [C_SMALLDATETIME] = @C_SMALLDATETIME, [C_SMALLINT] = @C_SMALLINT"& _ 
+                ", [C_SMALLMONEY] = @C_SMALLMONEY, [C_SQL_VARIANT] = @C_SQL_VARIANT, [C_TEXT] = @"& _ 
+                "C_TEXT, [C_TIME] = @C_TIME, [C_TINYINT] = @C_TINYINT, [C_UNIQUEIDENTIFIER] = @C_"& _ 
+                "UNIQUEIDENTIFIER, [C_VARBINARY] = @C_VARBINARY, [C_VARCHAR] = @C_VARCHAR, [C_XML"& _ 
+                "] = @C_XML WHERE (([ID] = @Original_ID) AND ((@IsNull_C_TIMESTAMP = 1 AND [C_TIM"& _ 
+                "ESTAMP] IS NULL) OR ([C_TIMESTAMP] = @Original_C_TIMESTAMP)));"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"SELECT ID, C_BIG"& _ 
+                "INT, C_BINARY, C_FLAG, C_CHAR, C_DATE, C_DATETIME, C_DATETIME2, C_DATETIMEOFFSET"& _ 
+                ", C_DECIMAL, C_FLOAT, C_HIERARCHYID, C_IMAGE, C_INT, C_MONEY, C_NCHAR, C_NTEXT, "& _ 
+                "C_NUMERIC, C_NVARCHAR, C_REAL, C_SMALLDATETIME, C_SMALLINT, C_SMALLMONEY, C_SQL_"& _ 
+                "VARIANT, C_TEXT, C_TIME, C_TIMESTAMP, C_TINYINT, C_UNIQUEIDENTIFIER, C_VARBINARY"& _ 
+                ", C_VARCHAR, C_XML FROM TestTable WHERE (ID = @ID)"
+            Me._adapter.UpdateCommand.CommandType = Global.System.Data.CommandType.Text
+            Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@C_BIGINT", Global.System.Data.SqlDbType.BigInt, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "C_BIGINT", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@C_BINARY", Global.System.Data.SqlDbType.Binary, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "C_BINARY", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@C_FLAG", Global.System.Data.SqlDbType.Bit, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "C_FLAG", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@C_CHAR", Global.System.Data.SqlDbType.[Char], 0, Global.System.Data.ParameterDirection.Input, 0, 0, "C_CHAR", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@C_DATE", Global.System.Data.SqlDbType.[Date], 0, Global.System.Data.ParameterDirection.Input, 0, 0, "C_DATE", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@C_DATETIME", Global.System.Data.SqlDbType.DateTime, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "C_DATETIME", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@C_DATETIME2", Global.System.Data.SqlDbType.DateTime2, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "C_DATETIME2", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@C_DATETIMEOFFSET", Global.System.Data.SqlDbType.DateTimeOffset, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "C_DATETIMEOFFSET", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@C_DECIMAL", Global.System.Data.SqlDbType.[Decimal], 0, Global.System.Data.ParameterDirection.Input, 18, 0, "C_DECIMAL", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@C_FLOAT", Global.System.Data.SqlDbType.Float, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "C_FLOAT", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@C_HIERARCHYID", Global.System.Data.SqlDbType.NVarChar, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "C_HIERARCHYID", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@C_IMAGE", Global.System.Data.SqlDbType.Image, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "C_IMAGE", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@C_INT", Global.System.Data.SqlDbType.Int, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "C_INT", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@C_MONEY", Global.System.Data.SqlDbType.Money, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "C_MONEY", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@C_NCHAR", Global.System.Data.SqlDbType.NChar, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "C_NCHAR", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@C_NTEXT", Global.System.Data.SqlDbType.NText, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "C_NTEXT", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@C_NUMERIC", Global.System.Data.SqlDbType.[Decimal], 0, Global.System.Data.ParameterDirection.Input, 18, 0, "C_NUMERIC", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@C_NVARCHAR", Global.System.Data.SqlDbType.NVarChar, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "C_NVARCHAR", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@C_REAL", Global.System.Data.SqlDbType.Real, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "C_REAL", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@C_SMALLDATETIME", Global.System.Data.SqlDbType.SmallDateTime, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "C_SMALLDATETIME", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@C_SMALLINT", Global.System.Data.SqlDbType.SmallInt, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "C_SMALLINT", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@C_SMALLMONEY", Global.System.Data.SqlDbType.SmallMoney, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "C_SMALLMONEY", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@C_SQL_VARIANT", Global.System.Data.SqlDbType.[Variant], 0, Global.System.Data.ParameterDirection.Input, 0, 0, "C_SQL_VARIANT", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@C_TEXT", Global.System.Data.SqlDbType.Text, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "C_TEXT", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@C_TIME", Global.System.Data.SqlDbType.Time, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "C_TIME", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@C_TINYINT", Global.System.Data.SqlDbType.TinyInt, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "C_TINYINT", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@C_UNIQUEIDENTIFIER", Global.System.Data.SqlDbType.UniqueIdentifier, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "C_UNIQUEIDENTIFIER", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@C_VARBINARY", Global.System.Data.SqlDbType.VarBinary, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "C_VARBINARY", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@C_VARCHAR", Global.System.Data.SqlDbType.VarChar, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "C_VARCHAR", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@C_XML", Global.System.Data.SqlDbType.Xml, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "C_XML", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@Original_ID", Global.System.Data.SqlDbType.Int, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "ID", Global.System.Data.DataRowVersion.Original, false, Nothing, "", "", ""))
+            Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@IsNull_C_TIMESTAMP", Global.System.Data.SqlDbType.Int, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "C_TIMESTAMP", Global.System.Data.DataRowVersion.Original, true, Nothing, "", "", ""))
+            Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@Original_C_TIMESTAMP", Global.System.Data.SqlDbType.Timestamp, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "C_TIMESTAMP", Global.System.Data.DataRowVersion.Original, false, Nothing, "", "", ""))
+            Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@ID", Global.System.Data.SqlDbType.Int, 4, Global.System.Data.ParameterDirection.Input, 0, 0, "ID", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Private Sub InitConnection()
+            Me._connection = New Global.System.Data.SqlClient.SqlConnection()
+            Me._connection.ConnectionString = Global.MyTestApp.My.MySettings.Default.LibrarySyetemConnectionString
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Private Sub InitCommandCollection()
+            Me._commandCollection = New Global.System.Data.SqlClient.SqlCommand(0) {}
+            Me._commandCollection(0) = New Global.System.Data.SqlClient.SqlCommand()
+            Me._commandCollection(0).Connection = Me.Connection
+            Me._commandCollection(0).CommandText = "SELECT ID, C_BIGINT, C_BINARY, C_FLAG, C_CHAR, C_DATE, C_DATETIME, C_DATETIME2, C"& _ 
+                "_DATETIMEOFFSET, C_DECIMAL, C_FLOAT, C_HIERARCHYID, C_IMAGE, C_INT, C_MONEY, C_N"& _ 
+                "CHAR, C_NTEXT, C_NUMERIC, C_NVARCHAR, C_REAL, C_SMALLDATETIME, C_SMALLINT, C_SMA"& _ 
+                "LLMONEY, C_SQL_VARIANT, C_TEXT, C_TIME, C_TIMESTAMP, C_TINYINT, C_UNIQUEIDENTIFI"& _ 
+                "ER, C_VARBINARY, C_VARCHAR, C_XML FROM dbo.TestTable"
+            Me._commandCollection(0).CommandType = Global.System.Data.CommandType.Text
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0"),  _
+         Global.System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter"),  _
+         Global.System.ComponentModel.DataObjectMethodAttribute(Global.System.ComponentModel.DataObjectMethodType.Fill, true)>  _
+        Public Overloads Overridable Function Fill(ByVal dataTable As LibrarySyetemDataSet.TestTableDataTable) As Integer
+            Me.Adapter.SelectCommand = Me.CommandCollection(0)
+            If (Me.ClearBeforeFill = true) Then
+                dataTable.Clear
+            End If
+            Dim returnValue As Integer = Me.Adapter.Fill(dataTable)
+            Return returnValue
+        End Function
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0"),  _
+         Global.System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter"),  _
+         Global.System.ComponentModel.DataObjectMethodAttribute(Global.System.ComponentModel.DataObjectMethodType.[Select], true)>  _
+        Public Overloads Overridable Function GetData() As LibrarySyetemDataSet.TestTableDataTable
+            Me.Adapter.SelectCommand = Me.CommandCollection(0)
+            Dim dataTable As LibrarySyetemDataSet.TestTableDataTable = New LibrarySyetemDataSet.TestTableDataTable()
+            Me.Adapter.Fill(dataTable)
+            Return dataTable
+        End Function
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0"),  _
+         Global.System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")>  _
+        Public Overloads Overridable Function Update(ByVal dataTable As LibrarySyetemDataSet.TestTableDataTable) As Integer
+            Return Me.Adapter.Update(dataTable)
+        End Function
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0"),  _
+         Global.System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")>  _
+        Public Overloads Overridable Function Update(ByVal dataSet As LibrarySyetemDataSet) As Integer
+            Return Me.Adapter.Update(dataSet, "TestTable")
+        End Function
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0"),  _
+         Global.System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")>  _
+        Public Overloads Overridable Function Update(ByVal dataRow As Global.System.Data.DataRow) As Integer
+            Return Me.Adapter.Update(New Global.System.Data.DataRow() {dataRow})
+        End Function
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0"),  _
+         Global.System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")>  _
+        Public Overloads Overridable Function Update(ByVal dataRows() As Global.System.Data.DataRow) As Integer
+            Return Me.Adapter.Update(dataRows)
+        End Function
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0"),  _
+         Global.System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter"),  _
+         Global.System.ComponentModel.DataObjectMethodAttribute(Global.System.ComponentModel.DataObjectMethodType.Delete, true)>  _
+        Public Overloads Overridable Function Delete(ByVal Original_ID As Integer, ByVal Original_C_TIMESTAMP() As Byte) As Integer
+            Me.Adapter.DeleteCommand.Parameters(0).Value = CType(Original_ID,Integer)
+            If (Original_C_TIMESTAMP Is Nothing) Then
+                Me.Adapter.DeleteCommand.Parameters(1).Value = CType(1,Object)
+                Me.Adapter.DeleteCommand.Parameters(2).Value = Global.System.DBNull.Value
+            Else
+                Me.Adapter.DeleteCommand.Parameters(1).Value = CType(0,Object)
+                Me.Adapter.DeleteCommand.Parameters(2).Value = CType(Original_C_TIMESTAMP,Byte())
+            End If
+            Dim previousConnectionState As Global.System.Data.ConnectionState = Me.Adapter.DeleteCommand.Connection.State
+            If ((Me.Adapter.DeleteCommand.Connection.State And Global.System.Data.ConnectionState.Open)  _
+                        <> Global.System.Data.ConnectionState.Open) Then
+                Me.Adapter.DeleteCommand.Connection.Open
+            End If
+            Try 
+                Dim returnValue As Integer = Me.Adapter.DeleteCommand.ExecuteNonQuery
+                Return returnValue
+            Finally
+                If (previousConnectionState = Global.System.Data.ConnectionState.Closed) Then
+                    Me.Adapter.DeleteCommand.Connection.Close
+                End If
+            End Try
+        End Function
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0"),  _
+         Global.System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter"),  _
+         Global.System.ComponentModel.DataObjectMethodAttribute(Global.System.ComponentModel.DataObjectMethodType.Insert, true)>  _
+        Public Overloads Overridable Function Insert( _
+                    ByVal C_BIGINT As Global.System.Nullable(Of Long),  _
+                    ByVal C_BINARY() As Byte,  _
+                    ByVal C_FLAG As Global.System.Nullable(Of Boolean),  _
+                    ByVal C_CHAR As String,  _
+                    ByVal C_DATE As Global.System.Nullable(Of Date),  _
+                    ByVal C_DATETIME As Global.System.Nullable(Of Date),  _
+                    ByVal C_DATETIME2 As Global.System.Nullable(Of Date),  _
+                    ByVal C_DATETIMEOFFSET As Global.System.Nullable(Of Global.System.DateTimeOffset),  _
+                    ByVal C_DECIMAL As Global.System.Nullable(Of Decimal),  _
+                    ByVal C_FLOAT As Global.System.Nullable(Of Double),  _
+                    ByVal C_HIERARCHYID As String,  _
+                    ByVal C_IMAGE() As Byte,  _
+                    ByVal C_INT As Global.System.Nullable(Of Integer),  _
+                    ByVal C_MONEY As Global.System.Nullable(Of Decimal),  _
+                    ByVal C_NCHAR As String,  _
+                    ByVal C_NTEXT As String,  _
+                    ByVal C_NUMERIC As Global.System.Nullable(Of Decimal),  _
+                    ByVal C_NVARCHAR As String,  _
+                    ByVal C_REAL As Global.System.Nullable(Of Single),  _
+                    ByVal C_SMALLDATETIME As Global.System.Nullable(Of Date),  _
+                    ByVal C_SMALLINT As Global.System.Nullable(Of Short),  _
+                    ByVal C_SMALLMONEY As Global.System.Nullable(Of Decimal),  _
+                    ByVal C_SQL_VARIANT As Object,  _
+                    ByVal C_TEXT As String,  _
+                    ByVal C_TIME As Global.System.Nullable(Of Global.System.TimeSpan),  _
+                    ByVal C_TINYINT As Global.System.Nullable(Of Byte),  _
+                    ByVal C_UNIQUEIDENTIFIER As Global.System.Nullable(Of Global.System.Guid),  _
+                    ByVal C_VARBINARY() As Byte,  _
+                    ByVal C_VARCHAR As String,  _
+                    ByVal C_XML As Object) As Integer
+            If (C_BIGINT.HasValue = true) Then
+                Me.Adapter.InsertCommand.Parameters(0).Value = CType(C_BIGINT.Value,Long)
+            Else
+                Me.Adapter.InsertCommand.Parameters(0).Value = Global.System.DBNull.Value
+            End If
+            If (C_BINARY Is Nothing) Then
+                Me.Adapter.InsertCommand.Parameters(1).Value = Global.System.DBNull.Value
+            Else
+                Me.Adapter.InsertCommand.Parameters(1).Value = CType(C_BINARY,Byte())
+            End If
+            If (C_FLAG.HasValue = true) Then
+                Me.Adapter.InsertCommand.Parameters(2).Value = CType(C_FLAG.Value,Boolean)
+            Else
+                Me.Adapter.InsertCommand.Parameters(2).Value = Global.System.DBNull.Value
+            End If
+            If (C_CHAR Is Nothing) Then
+                Me.Adapter.InsertCommand.Parameters(3).Value = Global.System.DBNull.Value
+            Else
+                Me.Adapter.InsertCommand.Parameters(3).Value = CType(C_CHAR,String)
+            End If
+            If (C_DATE.HasValue = true) Then
+                Me.Adapter.InsertCommand.Parameters(4).Value = CType(C_DATE.Value,Date)
+            Else
+                Me.Adapter.InsertCommand.Parameters(4).Value = Global.System.DBNull.Value
+            End If
+            If (C_DATETIME.HasValue = true) Then
+                Me.Adapter.InsertCommand.Parameters(5).Value = CType(C_DATETIME.Value,Date)
+            Else
+                Me.Adapter.InsertCommand.Parameters(5).Value = Global.System.DBNull.Value
+            End If
+            If (C_DATETIME2.HasValue = true) Then
+                Me.Adapter.InsertCommand.Parameters(6).Value = CType(C_DATETIME2.Value,Date)
+            Else
+                Me.Adapter.InsertCommand.Parameters(6).Value = Global.System.DBNull.Value
+            End If
+            If (C_DATETIMEOFFSET.HasValue = true) Then
+                Me.Adapter.InsertCommand.Parameters(7).Value = CType(C_DATETIMEOFFSET.Value,System.DateTimeOffset)
+            Else
+                Me.Adapter.InsertCommand.Parameters(7).Value = Global.System.DBNull.Value
+            End If
+            If (C_DECIMAL.HasValue = true) Then
+                Me.Adapter.InsertCommand.Parameters(8).Value = CType(C_DECIMAL.Value,Decimal)
+            Else
+                Me.Adapter.InsertCommand.Parameters(8).Value = Global.System.DBNull.Value
+            End If
+            If (C_FLOAT.HasValue = true) Then
+                Me.Adapter.InsertCommand.Parameters(9).Value = CType(C_FLOAT.Value,Double)
+            Else
+                Me.Adapter.InsertCommand.Parameters(9).Value = Global.System.DBNull.Value
+            End If
+            If (C_HIERARCHYID Is Nothing) Then
+                Me.Adapter.InsertCommand.Parameters(10).Value = Global.System.DBNull.Value
+            Else
+                Me.Adapter.InsertCommand.Parameters(10).Value = CType(C_HIERARCHYID,String)
+            End If
+            If (C_IMAGE Is Nothing) Then
+                Me.Adapter.InsertCommand.Parameters(11).Value = Global.System.DBNull.Value
+            Else
+                Me.Adapter.InsertCommand.Parameters(11).Value = CType(C_IMAGE,Byte())
+            End If
+            If (C_INT.HasValue = true) Then
+                Me.Adapter.InsertCommand.Parameters(12).Value = CType(C_INT.Value,Integer)
+            Else
+                Me.Adapter.InsertCommand.Parameters(12).Value = Global.System.DBNull.Value
+            End If
+            If (C_MONEY.HasValue = true) Then
+                Me.Adapter.InsertCommand.Parameters(13).Value = CType(C_MONEY.Value,Decimal)
+            Else
+                Me.Adapter.InsertCommand.Parameters(13).Value = Global.System.DBNull.Value
+            End If
+            If (C_NCHAR Is Nothing) Then
+                Me.Adapter.InsertCommand.Parameters(14).Value = Global.System.DBNull.Value
+            Else
+                Me.Adapter.InsertCommand.Parameters(14).Value = CType(C_NCHAR,String)
+            End If
+            If (C_NTEXT Is Nothing) Then
+                Me.Adapter.InsertCommand.Parameters(15).Value = Global.System.DBNull.Value
+            Else
+                Me.Adapter.InsertCommand.Parameters(15).Value = CType(C_NTEXT,String)
+            End If
+            If (C_NUMERIC.HasValue = true) Then
+                Me.Adapter.InsertCommand.Parameters(16).Value = CType(C_NUMERIC.Value,Decimal)
+            Else
+                Me.Adapter.InsertCommand.Parameters(16).Value = Global.System.DBNull.Value
+            End If
+            If (C_NVARCHAR Is Nothing) Then
+                Me.Adapter.InsertCommand.Parameters(17).Value = Global.System.DBNull.Value
+            Else
+                Me.Adapter.InsertCommand.Parameters(17).Value = CType(C_NVARCHAR,String)
+            End If
+            If (C_REAL.HasValue = true) Then
+                Me.Adapter.InsertCommand.Parameters(18).Value = CType(C_REAL.Value,Single)
+            Else
+                Me.Adapter.InsertCommand.Parameters(18).Value = Global.System.DBNull.Value
+            End If
+            If (C_SMALLDATETIME.HasValue = true) Then
+                Me.Adapter.InsertCommand.Parameters(19).Value = CType(C_SMALLDATETIME.Value,Date)
+            Else
+                Me.Adapter.InsertCommand.Parameters(19).Value = Global.System.DBNull.Value
+            End If
+            If (C_SMALLINT.HasValue = true) Then
+                Me.Adapter.InsertCommand.Parameters(20).Value = CType(C_SMALLINT.Value,Short)
+            Else
+                Me.Adapter.InsertCommand.Parameters(20).Value = Global.System.DBNull.Value
+            End If
+            If (C_SMALLMONEY.HasValue = true) Then
+                Me.Adapter.InsertCommand.Parameters(21).Value = CType(C_SMALLMONEY.Value,Decimal)
+            Else
+                Me.Adapter.InsertCommand.Parameters(21).Value = Global.System.DBNull.Value
+            End If
+            If (C_SQL_VARIANT Is Nothing) Then
+                Me.Adapter.InsertCommand.Parameters(22).Value = Global.System.DBNull.Value
+            Else
+                Me.Adapter.InsertCommand.Parameters(22).Value = CType(C_SQL_VARIANT,Object)
+            End If
+            If (C_TEXT Is Nothing) Then
+                Me.Adapter.InsertCommand.Parameters(23).Value = Global.System.DBNull.Value
+            Else
+                Me.Adapter.InsertCommand.Parameters(23).Value = CType(C_TEXT,String)
+            End If
+            If (C_TIME.HasValue = true) Then
+                Me.Adapter.InsertCommand.Parameters(24).Value = CType(C_TIME.Value,System.TimeSpan)
+            Else
+                Me.Adapter.InsertCommand.Parameters(24).Value = Global.System.DBNull.Value
+            End If
+            If (C_TINYINT.HasValue = true) Then
+                Me.Adapter.InsertCommand.Parameters(25).Value = CType(C_TINYINT.Value,Byte)
+            Else
+                Me.Adapter.InsertCommand.Parameters(25).Value = Global.System.DBNull.Value
+            End If
+            If (C_UNIQUEIDENTIFIER.HasValue = true) Then
+                Me.Adapter.InsertCommand.Parameters(26).Value = CType(C_UNIQUEIDENTIFIER.Value,System.Guid)
+            Else
+                Me.Adapter.InsertCommand.Parameters(26).Value = Global.System.DBNull.Value
+            End If
+            If (C_VARBINARY Is Nothing) Then
+                Me.Adapter.InsertCommand.Parameters(27).Value = Global.System.DBNull.Value
+            Else
+                Me.Adapter.InsertCommand.Parameters(27).Value = CType(C_VARBINARY,Byte())
+            End If
+            If (C_VARCHAR Is Nothing) Then
+                Me.Adapter.InsertCommand.Parameters(28).Value = Global.System.DBNull.Value
+            Else
+                Me.Adapter.InsertCommand.Parameters(28).Value = CType(C_VARCHAR,String)
+            End If
+            If (C_XML Is Nothing) Then
+                Me.Adapter.InsertCommand.Parameters(29).Value = Global.System.DBNull.Value
+            Else
+                Me.Adapter.InsertCommand.Parameters(29).Value = CType(C_XML,Object)
+            End If
+            Dim previousConnectionState As Global.System.Data.ConnectionState = Me.Adapter.InsertCommand.Connection.State
+            If ((Me.Adapter.InsertCommand.Connection.State And Global.System.Data.ConnectionState.Open)  _
+                        <> Global.System.Data.ConnectionState.Open) Then
+                Me.Adapter.InsertCommand.Connection.Open
+            End If
+            Try 
+                Dim returnValue As Integer = Me.Adapter.InsertCommand.ExecuteNonQuery
+                Return returnValue
+            Finally
+                If (previousConnectionState = Global.System.Data.ConnectionState.Closed) Then
+                    Me.Adapter.InsertCommand.Connection.Close
+                End If
+            End Try
+        End Function
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0"),  _
+         Global.System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter"),  _
+         Global.System.ComponentModel.DataObjectMethodAttribute(Global.System.ComponentModel.DataObjectMethodType.Update, true)>  _
+        Public Overloads Overridable Function Update( _
+                    ByVal C_BIGINT As Global.System.Nullable(Of Long),  _
+                    ByVal C_BINARY() As Byte,  _
+                    ByVal C_FLAG As Global.System.Nullable(Of Boolean),  _
+                    ByVal C_CHAR As String,  _
+                    ByVal C_DATE As Global.System.Nullable(Of Date),  _
+                    ByVal C_DATETIME As Global.System.Nullable(Of Date),  _
+                    ByVal C_DATETIME2 As Global.System.Nullable(Of Date),  _
+                    ByVal C_DATETIMEOFFSET As Global.System.Nullable(Of Global.System.DateTimeOffset),  _
+                    ByVal C_DECIMAL As Global.System.Nullable(Of Decimal),  _
+                    ByVal C_FLOAT As Global.System.Nullable(Of Double),  _
+                    ByVal C_HIERARCHYID As String,  _
+                    ByVal C_IMAGE() As Byte,  _
+                    ByVal C_INT As Global.System.Nullable(Of Integer),  _
+                    ByVal C_MONEY As Global.System.Nullable(Of Decimal),  _
+                    ByVal C_NCHAR As String,  _
+                    ByVal C_NTEXT As String,  _
+                    ByVal C_NUMERIC As Global.System.Nullable(Of Decimal),  _
+                    ByVal C_NVARCHAR As String,  _
+                    ByVal C_REAL As Global.System.Nullable(Of Single),  _
+                    ByVal C_SMALLDATETIME As Global.System.Nullable(Of Date),  _
+                    ByVal C_SMALLINT As Global.System.Nullable(Of Short),  _
+                    ByVal C_SMALLMONEY As Global.System.Nullable(Of Decimal),  _
+                    ByVal C_SQL_VARIANT As Object,  _
+                    ByVal C_TEXT As String,  _
+                    ByVal C_TIME As Global.System.Nullable(Of Global.System.TimeSpan),  _
+                    ByVal C_TINYINT As Global.System.Nullable(Of Byte),  _
+                    ByVal C_UNIQUEIDENTIFIER As Global.System.Nullable(Of Global.System.Guid),  _
+                    ByVal C_VARBINARY() As Byte,  _
+                    ByVal C_VARCHAR As String,  _
+                    ByVal C_XML As Object,  _
+                    ByVal Original_ID As Integer,  _
+                    ByVal Original_C_TIMESTAMP() As Byte,  _
+                    ByVal ID As Integer) As Integer
+            If (C_BIGINT.HasValue = true) Then
+                Me.Adapter.UpdateCommand.Parameters(0).Value = CType(C_BIGINT.Value,Long)
+            Else
+                Me.Adapter.UpdateCommand.Parameters(0).Value = Global.System.DBNull.Value
+            End If
+            If (C_BINARY Is Nothing) Then
+                Me.Adapter.UpdateCommand.Parameters(1).Value = Global.System.DBNull.Value
+            Else
+                Me.Adapter.UpdateCommand.Parameters(1).Value = CType(C_BINARY,Byte())
+            End If
+            If (C_FLAG.HasValue = true) Then
+                Me.Adapter.UpdateCommand.Parameters(2).Value = CType(C_FLAG.Value,Boolean)
+            Else
+                Me.Adapter.UpdateCommand.Parameters(2).Value = Global.System.DBNull.Value
+            End If
+            If (C_CHAR Is Nothing) Then
+                Me.Adapter.UpdateCommand.Parameters(3).Value = Global.System.DBNull.Value
+            Else
+                Me.Adapter.UpdateCommand.Parameters(3).Value = CType(C_CHAR,String)
+            End If
+            If (C_DATE.HasValue = true) Then
+                Me.Adapter.UpdateCommand.Parameters(4).Value = CType(C_DATE.Value,Date)
+            Else
+                Me.Adapter.UpdateCommand.Parameters(4).Value = Global.System.DBNull.Value
+            End If
+            If (C_DATETIME.HasValue = true) Then
+                Me.Adapter.UpdateCommand.Parameters(5).Value = CType(C_DATETIME.Value,Date)
+            Else
+                Me.Adapter.UpdateCommand.Parameters(5).Value = Global.System.DBNull.Value
+            End If
+            If (C_DATETIME2.HasValue = true) Then
+                Me.Adapter.UpdateCommand.Parameters(6).Value = CType(C_DATETIME2.Value,Date)
+            Else
+                Me.Adapter.UpdateCommand.Parameters(6).Value = Global.System.DBNull.Value
+            End If
+            If (C_DATETIMEOFFSET.HasValue = true) Then
+                Me.Adapter.UpdateCommand.Parameters(7).Value = CType(C_DATETIMEOFFSET.Value,System.DateTimeOffset)
+            Else
+                Me.Adapter.UpdateCommand.Parameters(7).Value = Global.System.DBNull.Value
+            End If
+            If (C_DECIMAL.HasValue = true) Then
+                Me.Adapter.UpdateCommand.Parameters(8).Value = CType(C_DECIMAL.Value,Decimal)
+            Else
+                Me.Adapter.UpdateCommand.Parameters(8).Value = Global.System.DBNull.Value
+            End If
+            If (C_FLOAT.HasValue = true) Then
+                Me.Adapter.UpdateCommand.Parameters(9).Value = CType(C_FLOAT.Value,Double)
+            Else
+                Me.Adapter.UpdateCommand.Parameters(9).Value = Global.System.DBNull.Value
+            End If
+            If (C_HIERARCHYID Is Nothing) Then
+                Me.Adapter.UpdateCommand.Parameters(10).Value = Global.System.DBNull.Value
+            Else
+                Me.Adapter.UpdateCommand.Parameters(10).Value = CType(C_HIERARCHYID,String)
+            End If
+            If (C_IMAGE Is Nothing) Then
+                Me.Adapter.UpdateCommand.Parameters(11).Value = Global.System.DBNull.Value
+            Else
+                Me.Adapter.UpdateCommand.Parameters(11).Value = CType(C_IMAGE,Byte())
+            End If
+            If (C_INT.HasValue = true) Then
+                Me.Adapter.UpdateCommand.Parameters(12).Value = CType(C_INT.Value,Integer)
+            Else
+                Me.Adapter.UpdateCommand.Parameters(12).Value = Global.System.DBNull.Value
+            End If
+            If (C_MONEY.HasValue = true) Then
+                Me.Adapter.UpdateCommand.Parameters(13).Value = CType(C_MONEY.Value,Decimal)
+            Else
+                Me.Adapter.UpdateCommand.Parameters(13).Value = Global.System.DBNull.Value
+            End If
+            If (C_NCHAR Is Nothing) Then
+                Me.Adapter.UpdateCommand.Parameters(14).Value = Global.System.DBNull.Value
+            Else
+                Me.Adapter.UpdateCommand.Parameters(14).Value = CType(C_NCHAR,String)
+            End If
+            If (C_NTEXT Is Nothing) Then
+                Me.Adapter.UpdateCommand.Parameters(15).Value = Global.System.DBNull.Value
+            Else
+                Me.Adapter.UpdateCommand.Parameters(15).Value = CType(C_NTEXT,String)
+            End If
+            If (C_NUMERIC.HasValue = true) Then
+                Me.Adapter.UpdateCommand.Parameters(16).Value = CType(C_NUMERIC.Value,Decimal)
+            Else
+                Me.Adapter.UpdateCommand.Parameters(16).Value = Global.System.DBNull.Value
+            End If
+            If (C_NVARCHAR Is Nothing) Then
+                Me.Adapter.UpdateCommand.Parameters(17).Value = Global.System.DBNull.Value
+            Else
+                Me.Adapter.UpdateCommand.Parameters(17).Value = CType(C_NVARCHAR,String)
+            End If
+            If (C_REAL.HasValue = true) Then
+                Me.Adapter.UpdateCommand.Parameters(18).Value = CType(C_REAL.Value,Single)
+            Else
+                Me.Adapter.UpdateCommand.Parameters(18).Value = Global.System.DBNull.Value
+            End If
+            If (C_SMALLDATETIME.HasValue = true) Then
+                Me.Adapter.UpdateCommand.Parameters(19).Value = CType(C_SMALLDATETIME.Value,Date)
+            Else
+                Me.Adapter.UpdateCommand.Parameters(19).Value = Global.System.DBNull.Value
+            End If
+            If (C_SMALLINT.HasValue = true) Then
+                Me.Adapter.UpdateCommand.Parameters(20).Value = CType(C_SMALLINT.Value,Short)
+            Else
+                Me.Adapter.UpdateCommand.Parameters(20).Value = Global.System.DBNull.Value
+            End If
+            If (C_SMALLMONEY.HasValue = true) Then
+                Me.Adapter.UpdateCommand.Parameters(21).Value = CType(C_SMALLMONEY.Value,Decimal)
+            Else
+                Me.Adapter.UpdateCommand.Parameters(21).Value = Global.System.DBNull.Value
+            End If
+            If (C_SQL_VARIANT Is Nothing) Then
+                Me.Adapter.UpdateCommand.Parameters(22).Value = Global.System.DBNull.Value
+            Else
+                Me.Adapter.UpdateCommand.Parameters(22).Value = CType(C_SQL_VARIANT,Object)
+            End If
+            If (C_TEXT Is Nothing) Then
+                Me.Adapter.UpdateCommand.Parameters(23).Value = Global.System.DBNull.Value
+            Else
+                Me.Adapter.UpdateCommand.Parameters(23).Value = CType(C_TEXT,String)
+            End If
+            If (C_TIME.HasValue = true) Then
+                Me.Adapter.UpdateCommand.Parameters(24).Value = CType(C_TIME.Value,System.TimeSpan)
+            Else
+                Me.Adapter.UpdateCommand.Parameters(24).Value = Global.System.DBNull.Value
+            End If
+            If (C_TINYINT.HasValue = true) Then
+                Me.Adapter.UpdateCommand.Parameters(25).Value = CType(C_TINYINT.Value,Byte)
+            Else
+                Me.Adapter.UpdateCommand.Parameters(25).Value = Global.System.DBNull.Value
+            End If
+            If (C_UNIQUEIDENTIFIER.HasValue = true) Then
+                Me.Adapter.UpdateCommand.Parameters(26).Value = CType(C_UNIQUEIDENTIFIER.Value,System.Guid)
+            Else
+                Me.Adapter.UpdateCommand.Parameters(26).Value = Global.System.DBNull.Value
+            End If
+            If (C_VARBINARY Is Nothing) Then
+                Me.Adapter.UpdateCommand.Parameters(27).Value = Global.System.DBNull.Value
+            Else
+                Me.Adapter.UpdateCommand.Parameters(27).Value = CType(C_VARBINARY,Byte())
+            End If
+            If (C_VARCHAR Is Nothing) Then
+                Me.Adapter.UpdateCommand.Parameters(28).Value = Global.System.DBNull.Value
+            Else
+                Me.Adapter.UpdateCommand.Parameters(28).Value = CType(C_VARCHAR,String)
+            End If
+            If (C_XML Is Nothing) Then
+                Me.Adapter.UpdateCommand.Parameters(29).Value = Global.System.DBNull.Value
+            Else
+                Me.Adapter.UpdateCommand.Parameters(29).Value = CType(C_XML,Object)
+            End If
+            Me.Adapter.UpdateCommand.Parameters(30).Value = CType(Original_ID,Integer)
+            If (Original_C_TIMESTAMP Is Nothing) Then
+                Me.Adapter.UpdateCommand.Parameters(31).Value = CType(1,Object)
+                Me.Adapter.UpdateCommand.Parameters(32).Value = Global.System.DBNull.Value
+            Else
+                Me.Adapter.UpdateCommand.Parameters(31).Value = CType(0,Object)
+                Me.Adapter.UpdateCommand.Parameters(32).Value = CType(Original_C_TIMESTAMP,Byte())
+            End If
+            Me.Adapter.UpdateCommand.Parameters(33).Value = CType(ID,Integer)
+            Dim previousConnectionState As Global.System.Data.ConnectionState = Me.Adapter.UpdateCommand.Connection.State
+            If ((Me.Adapter.UpdateCommand.Connection.State And Global.System.Data.ConnectionState.Open)  _
+                        <> Global.System.Data.ConnectionState.Open) Then
+                Me.Adapter.UpdateCommand.Connection.Open
+            End If
+            Try 
+                Dim returnValue As Integer = Me.Adapter.UpdateCommand.ExecuteNonQuery
+                Return returnValue
+            Finally
+                If (previousConnectionState = Global.System.Data.ConnectionState.Closed) Then
+                    Me.Adapter.UpdateCommand.Connection.Close
+                End If
+            End Try
+        End Function
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0"),  _
+         Global.System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter"),  _
+         Global.System.ComponentModel.DataObjectMethodAttribute(Global.System.ComponentModel.DataObjectMethodType.Update, true)>  _
+        Public Overloads Overridable Function Update( _
+                    ByVal C_BIGINT As Global.System.Nullable(Of Long),  _
+                    ByVal C_BINARY() As Byte,  _
+                    ByVal C_FLAG As Global.System.Nullable(Of Boolean),  _
+                    ByVal C_CHAR As String,  _
+                    ByVal C_DATE As Global.System.Nullable(Of Date),  _
+                    ByVal C_DATETIME As Global.System.Nullable(Of Date),  _
+                    ByVal C_DATETIME2 As Global.System.Nullable(Of Date),  _
+                    ByVal C_DATETIMEOFFSET As Global.System.Nullable(Of Global.System.DateTimeOffset),  _
+                    ByVal C_DECIMAL As Global.System.Nullable(Of Decimal),  _
+                    ByVal C_FLOAT As Global.System.Nullable(Of Double),  _
+                    ByVal C_HIERARCHYID As String,  _
+                    ByVal C_IMAGE() As Byte,  _
+                    ByVal C_INT As Global.System.Nullable(Of Integer),  _
+                    ByVal C_MONEY As Global.System.Nullable(Of Decimal),  _
+                    ByVal C_NCHAR As String,  _
+                    ByVal C_NTEXT As String,  _
+                    ByVal C_NUMERIC As Global.System.Nullable(Of Decimal),  _
+                    ByVal C_NVARCHAR As String,  _
+                    ByVal C_REAL As Global.System.Nullable(Of Single),  _
+                    ByVal C_SMALLDATETIME As Global.System.Nullable(Of Date),  _
+                    ByVal C_SMALLINT As Global.System.Nullable(Of Short),  _
+                    ByVal C_SMALLMONEY As Global.System.Nullable(Of Decimal),  _
+                    ByVal C_SQL_VARIANT As Object,  _
+                    ByVal C_TEXT As String,  _
+                    ByVal C_TIME As Global.System.Nullable(Of Global.System.TimeSpan),  _
+                    ByVal C_TINYINT As Global.System.Nullable(Of Byte),  _
+                    ByVal C_UNIQUEIDENTIFIER As Global.System.Nullable(Of Global.System.Guid),  _
+                    ByVal C_VARBINARY() As Byte,  _
+                    ByVal C_VARCHAR As String,  _
+                    ByVal C_XML As Object,  _
+                    ByVal Original_ID As Integer,  _
+                    ByVal Original_C_TIMESTAMP() As Byte) As Integer
+            Return Me.Update(C_BIGINT, C_BINARY, C_FLAG, C_CHAR, C_DATE, C_DATETIME, C_DATETIME2, C_DATETIMEOFFSET, C_DECIMAL, C_FLOAT, C_HIERARCHYID, C_IMAGE, C_INT, C_MONEY, C_NCHAR, C_NTEXT, C_NUMERIC, C_NVARCHAR, C_REAL, C_SMALLDATETIME, C_SMALLINT, C_SMALLMONEY, C_SQL_VARIANT, C_TEXT, C_TIME, C_TINYINT, C_UNIQUEIDENTIFIER, C_VARBINARY, C_VARCHAR, C_XML, Original_ID, Original_C_TIMESTAMP, Original_ID)
+        End Function
+    End Class
+    
+    '''<summary>
     '''TableAdapterManager is used to coordinate TableAdapters in the dataset to enable Hierarchical Update scenarios
     '''</summary>
     <Global.System.ComponentModel.DesignerCategoryAttribute("code"),  _
@@ -3406,6 +5845,8 @@ Namespace LibrarySyetemDataSetTableAdapters
         Private _table2TableAdapter As table2TableAdapter
         
         Private _table3TableAdapter As table3TableAdapter
+        
+        Private _testTableTableAdapter As TestTableTableAdapter
         
         Private _backupDataSetBeforeUpdate As Boolean
         
@@ -3479,6 +5920,20 @@ Namespace LibrarySyetemDataSetTableAdapters
         End Property
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0"),  _
+         Global.System.ComponentModel.EditorAttribute("Microsoft.VSDesigner.DataSource.Design.TableAdapterManagerPropertyEditor, Microso"& _ 
+            "ft.VSDesigner, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3"& _ 
+            "a", "System.Drawing.Design.UITypeEditor")>  _
+        Public Property TestTableTableAdapter() As TestTableTableAdapter
+            Get
+                Return Me._testTableTableAdapter
+            End Get
+            Set
+                Me._testTableTableAdapter = value
+            End Set
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
         Public Property BackupDataSetBeforeUpdate() As Boolean
             Get
@@ -3513,6 +5968,10 @@ Namespace LibrarySyetemDataSetTableAdapters
                             AndAlso (Not (Me._table3TableAdapter.Connection) Is Nothing)) Then
                     Return Me._table3TableAdapter.Connection
                 End If
+                If ((Not (Me._testTableTableAdapter) Is Nothing)  _
+                            AndAlso (Not (Me._testTableTableAdapter.Connection) Is Nothing)) Then
+                    Return Me._testTableTableAdapter.Connection
+                End If
                 Return Nothing
             End Get
             Set
@@ -3538,6 +5997,9 @@ Namespace LibrarySyetemDataSetTableAdapters
                 If (Not (Me._table3TableAdapter) Is Nothing) Then
                     count = (count + 1)
                 End If
+                If (Not (Me._testTableTableAdapter) Is Nothing) Then
+                    count = (count + 1)
+                End If
                 Return count
             End Get
         End Property
@@ -3549,15 +6011,6 @@ Namespace LibrarySyetemDataSetTableAdapters
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
         Private Function UpdateUpdatedRows(ByVal dataSet As LibrarySyetemDataSet, ByVal allChangedRows As Global.System.Collections.Generic.List(Of Global.System.Data.DataRow), ByVal allAddedRows As Global.System.Collections.Generic.List(Of Global.System.Data.DataRow)) As Integer
             Dim result As Integer = 0
-            If (Not (Me._table2TableAdapter) Is Nothing) Then
-                Dim updatedRows() As Global.System.Data.DataRow = dataSet.table2.Select(Nothing, Nothing, Global.System.Data.DataViewRowState.ModifiedCurrent)
-                updatedRows = Me.GetRealUpdatedRows(updatedRows, allAddedRows)
-                If ((Not (updatedRows) Is Nothing)  _
-                            AndAlso (0 < updatedRows.Length)) Then
-                    result = (result + Me._table2TableAdapter.Update(updatedRows))
-                    allChangedRows.AddRange(updatedRows)
-                End If
-            End If
             If (Not (Me._prefecturesMasTableAdapter) Is Nothing) Then
                 Dim updatedRows() As Global.System.Data.DataRow = dataSet.PrefecturesMas.Select(Nothing, Nothing, Global.System.Data.DataViewRowState.ModifiedCurrent)
                 updatedRows = Me.GetRealUpdatedRows(updatedRows, allAddedRows)
@@ -3576,12 +6029,30 @@ Namespace LibrarySyetemDataSetTableAdapters
                     allChangedRows.AddRange(updatedRows)
                 End If
             End If
+            If (Not (Me._table2TableAdapter) Is Nothing) Then
+                Dim updatedRows() As Global.System.Data.DataRow = dataSet.table2.Select(Nothing, Nothing, Global.System.Data.DataViewRowState.ModifiedCurrent)
+                updatedRows = Me.GetRealUpdatedRows(updatedRows, allAddedRows)
+                If ((Not (updatedRows) Is Nothing)  _
+                            AndAlso (0 < updatedRows.Length)) Then
+                    result = (result + Me._table2TableAdapter.Update(updatedRows))
+                    allChangedRows.AddRange(updatedRows)
+                End If
+            End If
             If (Not (Me._table3TableAdapter) Is Nothing) Then
                 Dim updatedRows() As Global.System.Data.DataRow = dataSet.table3.Select(Nothing, Nothing, Global.System.Data.DataViewRowState.ModifiedCurrent)
                 updatedRows = Me.GetRealUpdatedRows(updatedRows, allAddedRows)
                 If ((Not (updatedRows) Is Nothing)  _
                             AndAlso (0 < updatedRows.Length)) Then
                     result = (result + Me._table3TableAdapter.Update(updatedRows))
+                    allChangedRows.AddRange(updatedRows)
+                End If
+            End If
+            If (Not (Me._testTableTableAdapter) Is Nothing) Then
+                Dim updatedRows() As Global.System.Data.DataRow = dataSet.TestTable.Select(Nothing, Nothing, Global.System.Data.DataViewRowState.ModifiedCurrent)
+                updatedRows = Me.GetRealUpdatedRows(updatedRows, allAddedRows)
+                If ((Not (updatedRows) Is Nothing)  _
+                            AndAlso (0 < updatedRows.Length)) Then
+                    result = (result + Me._testTableTableAdapter.Update(updatedRows))
                     allChangedRows.AddRange(updatedRows)
                 End If
             End If
@@ -3595,14 +6066,6 @@ Namespace LibrarySyetemDataSetTableAdapters
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
         Private Function UpdateInsertedRows(ByVal dataSet As LibrarySyetemDataSet, ByVal allAddedRows As Global.System.Collections.Generic.List(Of Global.System.Data.DataRow)) As Integer
             Dim result As Integer = 0
-            If (Not (Me._table2TableAdapter) Is Nothing) Then
-                Dim addedRows() As Global.System.Data.DataRow = dataSet.table2.Select(Nothing, Nothing, Global.System.Data.DataViewRowState.Added)
-                If ((Not (addedRows) Is Nothing)  _
-                            AndAlso (0 < addedRows.Length)) Then
-                    result = (result + Me._table2TableAdapter.Update(addedRows))
-                    allAddedRows.AddRange(addedRows)
-                End If
-            End If
             If (Not (Me._prefecturesMasTableAdapter) Is Nothing) Then
                 Dim addedRows() As Global.System.Data.DataRow = dataSet.PrefecturesMas.Select(Nothing, Nothing, Global.System.Data.DataViewRowState.Added)
                 If ((Not (addedRows) Is Nothing)  _
@@ -3619,11 +6082,27 @@ Namespace LibrarySyetemDataSetTableAdapters
                     allAddedRows.AddRange(addedRows)
                 End If
             End If
+            If (Not (Me._table2TableAdapter) Is Nothing) Then
+                Dim addedRows() As Global.System.Data.DataRow = dataSet.table2.Select(Nothing, Nothing, Global.System.Data.DataViewRowState.Added)
+                If ((Not (addedRows) Is Nothing)  _
+                            AndAlso (0 < addedRows.Length)) Then
+                    result = (result + Me._table2TableAdapter.Update(addedRows))
+                    allAddedRows.AddRange(addedRows)
+                End If
+            End If
             If (Not (Me._table3TableAdapter) Is Nothing) Then
                 Dim addedRows() As Global.System.Data.DataRow = dataSet.table3.Select(Nothing, Nothing, Global.System.Data.DataViewRowState.Added)
                 If ((Not (addedRows) Is Nothing)  _
                             AndAlso (0 < addedRows.Length)) Then
                     result = (result + Me._table3TableAdapter.Update(addedRows))
+                    allAddedRows.AddRange(addedRows)
+                End If
+            End If
+            If (Not (Me._testTableTableAdapter) Is Nothing) Then
+                Dim addedRows() As Global.System.Data.DataRow = dataSet.TestTable.Select(Nothing, Nothing, Global.System.Data.DataViewRowState.Added)
+                If ((Not (addedRows) Is Nothing)  _
+                            AndAlso (0 < addedRows.Length)) Then
+                    result = (result + Me._testTableTableAdapter.Update(addedRows))
                     allAddedRows.AddRange(addedRows)
                 End If
             End If
@@ -3637,11 +6116,27 @@ Namespace LibrarySyetemDataSetTableAdapters
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
         Private Function UpdateDeletedRows(ByVal dataSet As LibrarySyetemDataSet, ByVal allChangedRows As Global.System.Collections.Generic.List(Of Global.System.Data.DataRow)) As Integer
             Dim result As Integer = 0
+            If (Not (Me._testTableTableAdapter) Is Nothing) Then
+                Dim deletedRows() As Global.System.Data.DataRow = dataSet.TestTable.Select(Nothing, Nothing, Global.System.Data.DataViewRowState.Deleted)
+                If ((Not (deletedRows) Is Nothing)  _
+                            AndAlso (0 < deletedRows.Length)) Then
+                    result = (result + Me._testTableTableAdapter.Update(deletedRows))
+                    allChangedRows.AddRange(deletedRows)
+                End If
+            End If
             If (Not (Me._table3TableAdapter) Is Nothing) Then
                 Dim deletedRows() As Global.System.Data.DataRow = dataSet.table3.Select(Nothing, Nothing, Global.System.Data.DataViewRowState.Deleted)
                 If ((Not (deletedRows) Is Nothing)  _
                             AndAlso (0 < deletedRows.Length)) Then
                     result = (result + Me._table3TableAdapter.Update(deletedRows))
+                    allChangedRows.AddRange(deletedRows)
+                End If
+            End If
+            If (Not (Me._table2TableAdapter) Is Nothing) Then
+                Dim deletedRows() As Global.System.Data.DataRow = dataSet.table2.Select(Nothing, Nothing, Global.System.Data.DataViewRowState.Deleted)
+                If ((Not (deletedRows) Is Nothing)  _
+                            AndAlso (0 < deletedRows.Length)) Then
+                    result = (result + Me._table2TableAdapter.Update(deletedRows))
                     allChangedRows.AddRange(deletedRows)
                 End If
             End If
@@ -3658,14 +6153,6 @@ Namespace LibrarySyetemDataSetTableAdapters
                 If ((Not (deletedRows) Is Nothing)  _
                             AndAlso (0 < deletedRows.Length)) Then
                     result = (result + Me._prefecturesMasTableAdapter.Update(deletedRows))
-                    allChangedRows.AddRange(deletedRows)
-                End If
-            End If
-            If (Not (Me._table2TableAdapter) Is Nothing) Then
-                Dim deletedRows() As Global.System.Data.DataRow = dataSet.table2.Select(Nothing, Nothing, Global.System.Data.DataViewRowState.Deleted)
-                If ((Not (deletedRows) Is Nothing)  _
-                            AndAlso (0 < deletedRows.Length)) Then
-                    result = (result + Me._table2TableAdapter.Update(deletedRows))
                     allChangedRows.AddRange(deletedRows)
                 End If
             End If
@@ -3724,6 +6211,10 @@ Namespace LibrarySyetemDataSetTableAdapters
             End If
             If ((Not (Me._table3TableAdapter) Is Nothing)  _
                         AndAlso (Me.MatchTableAdapterConnection(Me._table3TableAdapter.Connection) = false)) Then
+                Throw New Global.System.ArgumentException("TableAdapterManager で管理されるすべての TableAdapter は同一の接続文字列を使用する必要があります。")
+            End If
+            If ((Not (Me._testTableTableAdapter) Is Nothing)  _
+                        AndAlso (Me.MatchTableAdapterConnection(Me._testTableTableAdapter.Connection) = false)) Then
                 Throw New Global.System.ArgumentException("TableAdapterManager で管理されるすべての TableAdapter は同一の接続文字列を使用する必要があります。")
             End If
             Dim workConnection As Global.System.Data.IDbConnection = Me.Connection
@@ -3791,6 +6282,15 @@ Namespace LibrarySyetemDataSetTableAdapters
                     If Me._table3TableAdapter.Adapter.AcceptChangesDuringUpdate Then
                         Me._table3TableAdapter.Adapter.AcceptChangesDuringUpdate = false
                         adaptersWithAcceptChangesDuringUpdate.Add(Me._table3TableAdapter.Adapter)
+                    End If
+                End If
+                If (Not (Me._testTableTableAdapter) Is Nothing) Then
+                    revertConnections.Add(Me._testTableTableAdapter, Me._testTableTableAdapter.Connection)
+                    Me._testTableTableAdapter.Connection = CType(workConnection,Global.System.Data.SqlClient.SqlConnection)
+                    Me._testTableTableAdapter.Transaction = CType(workTransaction,Global.System.Data.SqlClient.SqlTransaction)
+                    If Me._testTableTableAdapter.Adapter.AcceptChangesDuringUpdate Then
+                        Me._testTableTableAdapter.Adapter.AcceptChangesDuringUpdate = false
+                        adaptersWithAcceptChangesDuringUpdate.Add(Me._testTableTableAdapter.Adapter)
                     End If
                 End If
                 '
@@ -3868,6 +6368,10 @@ Namespace LibrarySyetemDataSetTableAdapters
                 If (Not (Me._table3TableAdapter) Is Nothing) Then
                     Me._table3TableAdapter.Connection = CType(revertConnections(Me._table3TableAdapter),Global.System.Data.SqlClient.SqlConnection)
                     Me._table3TableAdapter.Transaction = Nothing
+                End If
+                If (Not (Me._testTableTableAdapter) Is Nothing) Then
+                    Me._testTableTableAdapter.Connection = CType(revertConnections(Me._testTableTableAdapter),Global.System.Data.SqlClient.SqlConnection)
+                    Me._testTableTableAdapter.Transaction = Nothing
                 End If
                 If (0 < adaptersWithAcceptChangesDuringUpdate.Count) Then
                     Dim adapters((adaptersWithAcceptChangesDuringUpdate.Count) - 1) As Global.System.Data.Common.DataAdapter

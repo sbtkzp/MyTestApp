@@ -90,6 +90,7 @@
   <ItemGroup>
     <Compile Include="Base\Calculater.vb" />
     <Compile Include="Base\ICalculater.vb" />
+    <Compile Include="Base\IFormDBAdaptable.vb" />
     <Compile Include="Form1.vb">
       <SubType>Form</SubType>
     </Compile>
@@ -100,9 +101,6 @@
     <Compile Include="LibrarySyetemDataSet.Designer.vb">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>LibrarySyetemDataSet.xsd</DependentUpon>
-    </Compile>
-    <Compile Include="LibrarySyetemDataSet.vb">
       <DependentUpon>LibrarySyetemDataSet.xsd</DependentUpon>
     </Compile>
     <Compile Include="My Project\AssemblyInfo.vb" />
@@ -139,6 +137,7 @@
     </None>
     <None Include="LibrarySyetemDataSet.xsd">
       <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>LibrarySyetemDataSet.Designer.vb</LastGenOutput>
       <SubType>Designer</SubType>
     </None>
     <None Include="LibrarySyetemDataSet.xss">
@@ -153,7 +152,9 @@
       <CustomToolNamespace>My</CustomToolNamespace>
       <LastGenOutput>Settings.Designer.vb</LastGenOutput>
     </None>
-    <None Include="App.config" />
+    <None Include="App.config">
+      <SubType>Designer</SubType>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <BootstrapperPackage Include=".NETFramework,Version=v4.5.2">

@@ -13,6 +13,7 @@
         ' T1TableAdapter.Insert("book8", "setumei8")
         T1TableAdapter.Update(LibrarySyetemDataSet.t1)
         Dim maxRow As Object = LibrarySyetemDataSet.t1.Compute("MAX(ID)", Nothing)
+
         MessageBox.Show("MAX(ID)=" & maxRow)
         MessageBox.Show(TableAdapterManager.Connection.ConnectionString)
 
@@ -20,8 +21,10 @@
         Table3TableAdapter.Update(LibrarySyetemDataSet.table3)
 
         Dim t1row As LibrarySyetemDataSet.t1Row = LibrarySyetemDataSet.t1.NewRow()
+
         t1row.NAME = "boeeboee"
         t1row.DESCRIPTION = "setumeeeeee1"
+        MessageBox.Show(t1row("ID"))
         LibrarySyetemDataSet.t1.Rows.Add(t1row)
         T1TableAdapter.Update(LibrarySyetemDataSet.t1)
     End Sub
